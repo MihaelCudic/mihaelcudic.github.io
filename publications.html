@@ -309,7 +309,7 @@ function applyFilters() {
   document.querySelectorAll('.pub-row').forEach(row => {
     const rowTopics = JSON.parse(row.dataset.topics || '[]');
     const rowType = row.dataset.tag;
-    const topicMatch = activeTopics.has('all') || [...activeTopics].some(t => rowTopics.includes(t));
+    const topicMatch = activeTopics.has('all') || [...activeTopics].every(t => rowTopics.includes(t));
     const typeMatch = activeType === 'all' || rowType === activeType || (activeType === 'journal' && rowType === 'featured');
     row.classList.toggle('hidden', !(topicMatch && typeMatch));
   });
