@@ -1,0 +1,39 @@
+name: Dr. Mihael Cudic
+title: Associate Professor
+department: Department of Cognitive Science
+university: University of Somewhere
+email: mihael.cudic@somewhere.edu
+office: Cognitive Science Building, Room 314
+office_hours: Tuesdays 2–4pm, or by appointment
+cv: CV.pdf
+headshot: headshot.jpg
+
+tagline: Researching the intersection of cognitive science and computational modeling. Building bridges between theory and data.
+
+bio1: I am an Associate Professor in the Department of Cognitive Science at the University of Somewhere, where I lead the Computational Mind Lab. My work sits at the intersection of cognitive psychology, neuroscience, and machine learning.
+bio2: Before joining the faculty at Somewhere, I completed my PhD at MIT and was a postdoctoral fellow at Stanford's Human-Centered AI Institute. I have been awarded the NSF CAREER Award and the Young Investigator Prize from the Cognitive Science Society.
+bio3: Outside of research, I am deeply committed to open science, reproducibility, and making academic knowledge accessible to broader audiences.
+
+stat1_number: 42
+stat1_label: Publications
+stat2_number: 1.2k
+stat2_label: Citations
+stat3_number: 8
+stat3_label: Years Active
+stat4_number: 5
+stat4_label: Grants Awarded
+
+interest1: Cognitive Modeling
+interest2: Bayesian Inference
+interest3: Language & Memory
+interest4: Human-AI Interaction
+
+edu1_degree: PhD, Cognitive Science
+edu1_institution: MIT, 2016
+edu2_degree: BSc, Psychology & Mathematics
+edu2_institution: University of Chicago, 2011
+
+social_scholar: https://scholar.google.com
+social_twitter: https://twitter.com
+social_github: https://github.com/mihaelcudic
+social_orcid: https://orcid.org

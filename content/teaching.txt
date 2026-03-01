@@ -1,0 +1,20 @@
+---
+code: COGS 101
+level: Undergraduate
+title: Introduction to Cognitive Science
+description: A broad survey of the interdisciplinary field of cognitive science, covering perception, memory, language, and reasoning.
+---
+code: COGS 310
+level: Undergraduate
+title: Memory & Cognition
+description: An advanced course on the psychology and neuroscience of human memory systems, from encoding to retrieval.
+---
+code: COGS 510
+level: Graduate
+title: Computational Models of Mind
+description: An intensive graduate seminar on probabilistic and neural models of cognition, with a hands-on modeling lab component.
+---
+code: COGS 590
+level: Graduate
+title: Research Methods in Cognitive Science
+description: Training in experimental design, open science practices, and statistical modeling for graduate researchers.

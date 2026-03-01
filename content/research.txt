@@ -1,0 +1,9 @@
+---
+title: Computational Cognition
+description: Developing Bayesian models of human reasoning and decision-making under uncertainty, with applications to clinical and educational settings.
+---
+title: Language & Memory
+description: Investigating how language shapes and retrieves episodic memories, combining behavioral experiments with neuroimaging methods.
+---
+title: Human-AI Collaboration
+description: Studying how humans and AI systems can effectively collaborate on complex cognitive tasks, with a focus on trust and error recovery.
