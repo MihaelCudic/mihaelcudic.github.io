@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dr. Mihael Čudić</title>
+  <title>Dr. Mihael Cudic</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
     /* ── ABOUT-SPECIFIC ─────────────────────────────────────── */
@@ -245,7 +245,7 @@ const PROFILE = {
   bio_3: "My current research focuses on developing machine learning methods to calibrate polygenic scores to individual environmental contexts, with the goal of improving personalized risk prediction for psychiatric conditions.",
 
   stats: [
-    { number: "7",    label: "Publications" },
+    { number: "9",    label: "Publications" },
     { number: "6",    label: "Years Active" },
     { number: ">$100k",    label: "Grants"  },
   ],
@@ -312,9 +312,9 @@ function buildMain(p) {
   const el = document.getElementById('main');
 
   el.innerHTML += `
-    <p class="hero-tag">${p.title} ·</p>
-    <p class="hero-tag">${p.university}</p>
-    <h1 class="hero-name">${p.name_line1}<br><em>${p.name_line2}</em></h1>
+    <p class="hero-tag" style="margin-bottom:0.3rem">${p.title}</p>
+    <p class="hero-tag" style="margin-bottom:1.5rem">${p.university}</p>
+    <h1 class="hero-name">${p.name_line1} <em>${p.name_line2}</em></h1>
     <div class="divider"></div>`;
 
   let bioHTML = '<div class="bio-text">';
@@ -355,4 +355,3 @@ buildMain(PROFILE);
 </script>
 </body>
 </html>
-
