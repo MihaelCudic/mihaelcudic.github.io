@@ -171,10 +171,8 @@
     }
 
     .pub-tag.journal     { color: var(--black); }
-    .pub-tag.conference  { color: #1a5a8b; border-color: #1a5a8b; }
     .pub-tag.preprint    { color: #6b7280; border-color: #6b7280; }
-    .pub-tag.featured    { background: var(--black); color: var(--white); border-color: var(--black); }
-    .pub-tag.book        { color: #5a3b8b; border-color: #5a3b8b; }
+    .pub-tag.chapter        { color: #5a3b8b; border-color: #5a3b8b; }
     .pub-tag.topic-tag   { font-size: 0.56rem; color: var(--accent); border-color: var(--accent); opacity: 0.75; }
 
     @media (max-width: 768px) {
@@ -209,9 +207,8 @@
         <span class="filter-label">Type:</span>
         <button class="filter-btn type-btn active" data-type="all">All</button>
         <button class="filter-btn type-btn" data-type="journal">Journal</button>
-        <button class="filter-btn type-btn" data-type="conference">Conference</button>
         <button class="filter-btn type-btn" data-type="preprint">Preprint</button>
-        <button class="filter-btn type-btn" data-type="book">Book</button>
+        <button class="filter-btn type-btn" data-type="book">Chapter</button>
         <button class="filter-btn first-author-btn" data-firstauthor="true">First Author</button>
         <span class="pub-count" id="pub-count"></span>
       </div>
@@ -260,7 +257,7 @@ const PUBLICATIONS = [
     title: "Neuron Segmentation from Noisy Fluorescence Microscopy Images Using Deep Learning with Local and Global Scale Fusion",
     authors: "<strong>M. Cudic</strong>, J. Diamond & A. Noble",
     venue: "Neuromethods",
-    tag: "book",
+    tag: "chapter",
     topics: ["AI", "Neuroscience"],
     firstAuthor: true,
     url: "https://link.springer.com/protocol/10.1007/978-1-0716-4011-1_3",
@@ -280,7 +277,7 @@ const PUBLICATIONS = [
     title: "Using a Recurrent Kernel Learning Machine for Small-Sample Image Classification",
     authors: "<strong>M. Cudic</strong> & J. Principe",
     venue: "International Joint Conference on Neural Networks",
-    tag: "conference",
+    tag: "journal",
     topics: ["AI"],
     firstAuthor: true,
     url: "https://ieeexplore.ieee.org/document/8852004",
@@ -290,7 +287,7 @@ const PUBLICATIONS = [
     title: "Prediction of sorghum bicolor genotype from in-situ images using autoencoder-identified SNPs",
     authors: "<strong>M. Cudic</strong>, H. Baweja, T. Parhar & S. Nuske",
     venue: "IEEE International Conference on Machine Learning and Applications",
-    tag: "conference",
+    tag: "journal",
     topics: ["AI", "Genetics"],
     firstAuthor: true,
     url: "https://ieeexplore.ieee.org/document/8614037",
