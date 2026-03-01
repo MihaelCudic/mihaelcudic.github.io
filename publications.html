@@ -6,13 +6,18 @@
   <title>Publications — Dr. Mihael Cudic</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
-    /* ── PUBLICATIONS-SPECIFIC ──────────────────────────────── */
     .pub-controls {
       padding: 1.25rem 3rem;
       border-bottom: var(--border);
       display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .filter-row {
+      display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
 
@@ -21,6 +26,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--mid);
+      min-width: 56px;
     }
 
     .filter-btn {
@@ -36,20 +42,32 @@
       transition: all 0.15s;
     }
 
-    .filter-btn:hover,
-    .filter-btn.active {
+    .filter-btn:hover { background: var(--light); color: var(--black); }
+
+    .topic-btn.active {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+    }
+
+    .type-btn.active {
       background: var(--black);
       color: var(--white);
     }
 
+    .filter-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(0,0,0,0.08);
+    }
+
     .pub-count {
-      margin-left: auto;
       font-size: 0.68rem;
       letter-spacing: 0.08em;
       color: var(--mid);
+      margin-left: auto;
     }
 
-    /* Year group */
     .year-group { border-bottom: var(--border); }
 
     .year-label {
@@ -63,7 +81,6 @@
       letter-spacing: -0.01em;
     }
 
-    /* Single pub row */
     .pub-row {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -76,7 +93,6 @@
 
     .pub-row:last-child { border-bottom: none; }
     .pub-row:hover { background: var(--light); }
-
     .pub-row.hidden { display: none; }
 
     .pub-title {
@@ -101,7 +117,15 @@
       line-height: 1.6;
     }
 
+    .pub-meta strong { color: var(--black); font-weight: 600; }
     .pub-meta .venue { font-style: italic; }
+
+    .pub-tags {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.35rem;
+    }
 
     .pub-tag {
       font-size: 0.62rem;
@@ -110,8 +134,6 @@
       padding: 0.25rem 0.6rem;
       border: 1px solid currentColor;
       white-space: nowrap;
-      align-self: start;
-      margin-top: 0.2rem;
     }
 
     .pub-tag.journal     { color: var(--black); }
@@ -119,11 +141,13 @@
     .pub-tag.preprint    { color: #6b7280; border-color: #6b7280; }
     .pub-tag.featured    { background: var(--black); color: var(--white); border-color: var(--black); }
     .pub-tag.book        { color: #5a3b8b; border-color: #5a3b8b; }
+    .pub-tag.topic-tag   { font-size: 0.56rem; color: var(--accent); border-color: var(--accent); opacity: 0.75; }
 
     @media (max-width: 768px) {
       .pub-controls { padding: 1rem 1.25rem; }
       .pub-row { grid-template-columns: 1fr; padding: 1.25rem; gap: 0.75rem; }
       .year-label { padding: 0.5rem 1.25rem; }
+      .pub-tags { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
     }
   </style>
 </head>
@@ -136,12 +160,25 @@
   </div>
 
   <div class="pub-controls">
-    <span class="filter-label">Filter:</span>
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="journal">Journal</button>
-    <button class="filter-btn" data-filter="conference">Conference</button>
-    <button class="filter-btn" data-filter="preprint">Preprint</button>
-    <span class="pub-count" id="pub-count"></span>
+    <div class="filter-row">
+      <span class="filter-label">Topic:</span>
+      <button class="filter-btn topic-btn active" data-topic="all">All</button>
+      <button class="filter-btn topic-btn" data-topic="AI">AI</button>
+      <button class="filter-btn topic-btn" data-topic="Genetics">Genetics</button>
+      <button class="filter-btn topic-btn" data-topic="Epidemiology">Epidemiology</button>
+      <button class="filter-btn topic-btn" data-topic="Psychiatry">Psychiatry</button>
+      <button class="filter-btn topic-btn" data-topic="Neuroscience">Neuroscience</button>
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-row">
+      <span class="filter-label">Type:</span>
+      <button class="filter-btn type-btn active" data-type="all">All</button>
+      <button class="filter-btn type-btn" data-type="journal">Journal</button>
+      <button class="filter-btn type-btn" data-type="conference">Conference</button>
+      <button class="filter-btn type-btn" data-type="preprint">Preprint</button>
+      <button class="filter-btn type-btn" data-type="book">Book</button>
+      <span class="pub-count" id="pub-count"></span>
+    </div>
   </div>
 
   <div id="pub-list"></div>
@@ -150,97 +187,84 @@
 
 <script src="nav.js"></script>
 <script>
-/* ============================================================
-   PUBLICATIONS LIST
-   ─────────────────────────────────────────────────────────────
-   ADD new publications to the TOP of this array — they will
-   automatically appear first (grouped by year, newest first).
-
-   Fields:
-     year        — publication year (number)
-     title       — full paper title
-     authors     — author list as a string
-     venue       — journal or conference name
-     tag         — "journal" | "conference" | "preprint" | "book" | "featured"
-     url         — link to paper (or "" to skip)
-   ============================================================ */
 const PUBLICATIONS = [
-
-  // ── ADD NEW PUBLICATIONS HERE (at the top) ───────────────── //
-
   {
     year: 2025,
     title: "Putting Polygenic Scores in Context: How Intersectional Factors Affect Relative and Absolute Genetic Risk",
-    authors: "M. Cudic, J. Tubbs, T. Ge & J. Smoller",
+    authors: "<strong>M. Cudic</strong>, J. Tubbs, T. Ge & J. Smoller",
     venue: "Accepted to American Journal for Human Genetics",
     tag: "preprint",
+    topics: ["Genetics", "Psychiatry"],
     url: "https://www.medrxiv.org/content/10.1101/2025.06.04.25328987v1",
   },
   {
     year: 2024,
     title: "Neuron Segmentation from Noisy Fluorescence Microscopy Images Using Deep Learning with Local and Global Scale Fusion",
-    authors: "M. Cudic, J. Diamond & A. Noble",
+    authors: "<strong>M. Cudic</strong>, J. Diamond & A. Noble",
     venue: "Neuromethods",
     tag: "book",
+    topics: ["AI", "Neuroscience"],
     url: "https://link.springer.com/protocol/10.1007/978-1-0716-4011-1_3",
   },
   {
     year: 2023,
-    title: "Unpaired mesh-to-image translation for 3D fluorescent microscopy images of neuronss",
-    authors: "M. Cudic, J. Diamond & A. Noble",
+    title: "Unpaired mesh-to-image translation for 3D fluorescent microscopy images of neurons",
+    authors: "<strong>M. Cudic</strong>, J. Diamond & A. Noble",
     venue: "Medical Image Analysis",
     tag: "journal",
+    topics: ["AI", "Neuroscience"],
     url: "https://www.sciencedirect.com/science/article/pii/S1361841523000294",
   },
   {
     year: 2019,
     title: "Using a Recurrent Kernel Learning Machine for Small-Sample Image Classification",
-    authors: "M. Cudic & J. Principe",
+    authors: "<strong>M. Cudic</strong> & J. Principe",
     venue: "International Joint Conference on Neural Networks",
     tag: "conference",
+    topics: ["AI"],
     url: "https://ieeexplore.ieee.org/document/8852004",
   },
   {
     year: 2018,
     title: "Prediction of sorghum bicolor genotype from in-situ images using autoencoder-identified SNPs",
-    authors: "M. Cudic, H. Baweja, T. Parhar & S. Nuske",
+    authors: "<strong>M. Cudic</strong>, H. Baweja, T. Parhar & S. Nuske",
     venue: "IEEE International Conference on Machine Learning and Applications",
     tag: "conference",
+    topics: ["AI", "Genetics"],
     url: "https://ieeexplore.ieee.org/document/8614037",
   },
   {
     year: 2018,
     title: "A flexible testing environment for visual question answering with performance evaluation",
-    authors: "M. Cudic, R. Burt, E. Santana & J.Principe",
+    authors: "<strong>M. Cudic</strong>, R. Burt, E. Santana & J. Principe",
     venue: "Neurocomputing",
     tag: "journal",
+    topics: ["AI"],
     url: "https://www.sciencedirect.com/science/article/abs/pii/S0925231218302315",
   },
   {
     year: 2017,
     title: "Fusing Attention with Visual Question Answering",
-    authors: "R. Burt, M. Cudic & J. Principe",
+    authors: "R. Burt, <strong>M. Cudic</strong> & J. Principe",
     venue: "International Joint Conference on Neural Networks",
     tag: "journal",
+    topics: ["AI"],
     url: "https://ieeexplore.ieee.org/document/7965954",
   },
-
 ];
 
-/* ── RENDER ───────────────────────────────────────────────── */
+let activeTopics = new Set(['all']);
+let activeType = 'all';
+
 function renderPublications(pubs) {
   const container = document.getElementById('pub-list');
-
-  // Group by year descending
   const byYear = {};
   pubs.forEach(p => {
     if (!byYear[p.year]) byYear[p.year] = [];
     byYear[p.year].push(p);
   });
 
-  const years = Object.keys(byYear).sort((a, b) => b - a);
-
-  years.forEach(year => {
+  Object.keys(byYear).sort((a, b) => b - a).forEach(year => {
     const group = document.createElement('div');
     group.className = 'year-group';
     group.innerHTML = `<div class="year-label">${year}</div>`;
@@ -249,10 +273,15 @@ function renderPublications(pubs) {
       const row = document.createElement('div');
       row.className = 'pub-row';
       row.dataset.tag = p.tag;
+      row.dataset.topics = JSON.stringify(p.topics || []);
 
       const titleHTML = p.url
         ? `<a href="${p.url}" target="_blank">${p.title}</a>`
         : p.title;
+
+      const topicPills = (p.topics || []).map(t =>
+        `<span class="pub-tag topic-tag">${t}</span>`
+      ).join('');
 
       row.innerHTML = `
         <div>
@@ -262,7 +291,10 @@ function renderPublications(pubs) {
             <span class="venue">${p.venue}</span>
           </div>
         </div>
-        <span class="pub-tag ${p.tag}">${p.tag}</span>`;
+        <div class="pub-tags">
+          <span class="pub-tag ${p.tag}">${p.tag}</span>
+          ${topicPills}
+        </div>`;
 
       group.appendChild(row);
     });
@@ -270,33 +302,65 @@ function renderPublications(pubs) {
     container.appendChild(group);
   });
 
+  applyFilters();
+}
+
+function applyFilters() {
+  document.querySelectorAll('.pub-row').forEach(row => {
+    const rowTopics = JSON.parse(row.dataset.topics || '[]');
+    const rowType = row.dataset.tag;
+    const topicMatch = activeTopics.has('all') || [...activeTopics].some(t => rowTopics.includes(t));
+    const typeMatch = activeType === 'all' || rowType === activeType || (activeType === 'journal' && rowType === 'featured');
+    row.classList.toggle('hidden', !(topicMatch && typeMatch));
+  });
+
+  document.querySelectorAll('.year-group').forEach(g => {
+    const anyVisible = [...g.querySelectorAll('.pub-row')].some(r => !r.classList.contains('hidden'));
+    g.style.display = anyVisible ? '' : 'none';
+  });
+
   updateCount();
 }
 
-// ── FILTER
 function updateCount() {
   const visible = document.querySelectorAll('.pub-row:not(.hidden)').length;
   document.getElementById('pub-count').textContent = `${visible} publication${visible !== 1 ? 's' : ''}`;
 }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
+// Topic: multi-select
+document.querySelectorAll('.topic-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    const topic = btn.dataset.topic;
+    if (topic === 'all') {
+      activeTopics = new Set(['all']);
+      document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    } else {
+      activeTopics.delete('all');
+      document.querySelector('.topic-btn[data-topic="all"]').classList.remove('active');
+      if (activeTopics.has(topic)) {
+        activeTopics.delete(topic);
+        btn.classList.remove('active');
+      } else {
+        activeTopics.add(topic);
+        btn.classList.add('active');
+      }
+      if (activeTopics.size === 0) {
+        activeTopics.add('all');
+        document.querySelector('.topic-btn[data-topic="all"]').classList.add('active');
+      }
+    }
+    applyFilters();
+  });
+});
+
+// Type: single-select
+document.querySelectorAll('.type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filter = btn.dataset.filter;
-
-    document.querySelectorAll('.pub-row').forEach(row => {
-      const match = filter === 'all' || row.dataset.tag === filter || (filter === 'journal' && row.dataset.tag === 'featured');
-      row.classList.toggle('hidden', !match);
-    });
-
-    // Hide empty year groups
-    document.querySelectorAll('.year-group').forEach(g => {
-      const anyVisible = [...g.querySelectorAll('.pub-row')].some(r => !r.classList.contains('hidden'));
-      g.style.display = anyVisible ? '' : 'none';
-    });
-
-    updateCount();
+    activeType = btn.dataset.type;
+    applyFilters();
   });
 });
 
