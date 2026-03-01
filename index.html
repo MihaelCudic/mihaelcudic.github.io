@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dr. Mihael Cudic</title>
+  <title>Dr. Mihael Čudić</title>
   <link rel="stylesheet" href="style.css"/>
   <style>
     /* ── ABOUT-SPECIFIC ─────────────────────────────────────── */
@@ -231,10 +231,10 @@ const user = "mcudic";
 const domain = "mgh.harvard.edu";
 const PROFILE = {
   name_line1: "Mihael",
-  name_line2: "Cudic",
+  name_line2: "Čudić",
   title: "Postdoctoral Research Fellow",
   department: "Department of Psychiatry",
-  university: "Massachusetts General Hospital | Harvard Medical School",
+  university: "Massachusetts General Hospital | Harvard Medical School | Broad Institute",
   email: `${user}@${domain}`,
   office: "Center for Precision Psychiatry",
   cv: "CV.pdf",
@@ -246,9 +246,8 @@ const PROFILE = {
 
   stats: [
     { number: "7",    label: "Publications" },
-    { number: "150+", label: "Citations"    },
     { number: "6",    label: "Years Active" },
-    { number: "3",    label: "Fellowships"  },
+    { number: "> $100K",    label: "Grants"  },
   ],
 
   interests: [
@@ -259,7 +258,7 @@ const PROFILE = {
   ],
 
   education: [
-    { degree: "Postdoc, Precision and Genomic Medicine", institution: "Harvard Medical School, Current" },
+    { degree: "Postdoc, Precision and Genomic Medicine", institution: "Harvard University, Current" },
     { degree: "DPhil, AI for Biomedical Sciences", institution: "University of Oxford, 2023" },
     { degree: "BSc, Electrical Engineering", institution: "University of Florida, 2018" },
   ],
@@ -307,7 +306,8 @@ function buildMain(p) {
   const el = document.getElementById('main');
 
   el.innerHTML += `
-    <p class="hero-tag">${p.title} · ${p.university}</p>
+    <p class="hero-tag">${p.title}</p>
+    <p class="hero-tag">${p.university}</p>
     <h1 class="hero-name">${p.name_line1}<br><em>${p.name_line2}</em></h1>
     <div class="divider"></div>`;
 
