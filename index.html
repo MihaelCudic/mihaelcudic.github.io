@@ -282,6 +282,13 @@ function buildSidebar(p) {
 
   el.innerHTML += `
     <div class="sidebar-block">
+      <a href="${p.cv}" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.25rem;border:var(--border);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--black);transition:all 0.15s;" onmouseover="this.style.background='var(--black)';this.style.color='var(--white)'" onmouseout="this.style.background='';this.style.color='var(--black)'">
+        ↓ &nbsp;Download CV
+      </a>
+    </div>`;
+
+  el.innerHTML += `
+    <div class="sidebar-block">
       <h3>Research Interests</h3>
       <ul>${p.interests.map(i => `<li>${i}</li>`).join('')}</ul>
     </div>`;
@@ -297,7 +304,6 @@ function buildSidebar(p) {
       <h3>Links</h3>
       <div class="sidebar-links">
         ${p.links.filter(l => l.url).map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}
-        <a href="${p.cv}">Download CV</a>
       </div>
     </div>`;
 }
@@ -349,3 +355,4 @@ buildMain(PROFILE);
 </script>
 </body>
 </html>
+
