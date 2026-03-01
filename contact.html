@@ -153,13 +153,13 @@
    ============================================================ */
 const CONTACT = {
   tagline_1: "Interested in collaborating",
-  tagline_2: "or joining the lab?",
+  tagline_2: "or joining the Center for Precision Psychiatry?",
   tagline_accent: "Get in touch.",
   blurb: "I welcome inquiries from prospective PhD students and postdoctoral researchers. Please include a CV and a brief statement of research interests when reaching out.",
 
-  email: "mihael.cudic@somewhere.edu",
-  office: "Cognitive Science Building, Room 314\nUniversity of Somewhere\nSometown, ST 00000",
-  office_hours: "Tuesdays 2–4 pm, or by appointment",
+  emailUser: "mcudic",
+  emailDomain: "mgh.harvard.edu",
+  office: "Simches Research Building\nMassachusetts General Hospital\nBoston, MA 02114",
 
   links: [
     { label: "Google Scholar", url: "https://scholar.google.com" },
@@ -168,7 +168,7 @@ const CONTACT = {
     { label: "Twitter / X",   url: "https://twitter.com" },
   ],
 
-  prospective_note: "I am currently accepting PhD students for the 2025–26 cycle. If you are interested in working with me, please read recent papers from the lab before reaching out and mention specific projects you are excited about.",
+  prospective_note: "I am currently accepting summer interns for 2026. If you are interested in working with me, please read recent papers from the lab before reaching out and mention specific projects you are excited about.",
 };
 
 /* ── RENDER ───────────────────────────────────────────────── */
@@ -190,20 +190,22 @@ left.innerHTML = `
 right.innerHTML = `
   <div class="contact-block">
     <h3>Email</h3>
-    <a class="email-link" href="mailto:${CONTACT.email}">${CONTACT.email}</a>
+    <a class="email-link" id="email-link" href="#">${CONTACT.emailUser} [at] ${CONTACT.emailDomain}</a>
   </div>
   <div class="contact-block">
     <h3>Office</h3>
     <p>${CONTACT.office.replace(/\n/g, '<br>')}</p>
   </div>
-  <div class="contact-block">
-    <h3>Office Hours</h3>
-    <p>${CONTACT.office_hours}</p>
-  </div>
   <div class="prospective-box">
     <h3>Prospective Students</h3>
     <p>${CONTACT.prospective_note}</p>
   </div>`;
+
+document.getElementById('email-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  const addr = CONTACT.emailUser + '@' + CONTACT.emailDomain;
+  window.location.href = 'mailto:' + addr;
+});
 </script>
 </body>
 </html>
