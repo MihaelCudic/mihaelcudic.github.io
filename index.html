@@ -161,6 +161,47 @@
       margin-top: 0.3rem;
     }
 
+    /* ── TALK SECTION ────────────────────────────────────────── */
+    .talk-section {
+      margin-top: 3.5rem;
+      border-top: var(--border);
+      padding-top: 2.5rem;
+    }
+
+    .talk-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .talk-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--black);
+    }
+
+    .talk-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border: var(--border);
+    }
+
+    .talk-video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 900px) {
       .about-layout { grid-template-columns: 1fr; }
@@ -186,9 +227,6 @@
 
 <script src="nav.js"></script>
 <script>
-/* ============================================================
-   EDIT YOUR PROFILE HERE
-   ============================================================ */
 const user = "mcudic";
 const domain = "mgh.harvard.edu";
 const PROFILE = {
@@ -197,39 +235,35 @@ const PROFILE = {
   title: "Postdoctoral Research Fellow",
   department: "Department of Psychiatry",
   university: "Massachusetts General Hospital | Harvard Medical School",
-  email: "${user}@${domain}",
+  email: `${user}@${domain}`,
   office: "Center for Precision Psychiatry",
   cv: "CV.pdf",
   headshot: "images/headshot.jpg",
 
-  // ── BIO PARAGRAPHS (add more bio_N as needed)
-  bio_1: "I am an <strong>Associate Professor</strong> in the Department of Cognitive Science at the University of Somewhere, where I lead the Computational Mind Lab. My work sits at the intersection of cognitive psychology, neuroscience, and machine learning.",
-  bio_2: "Before joining the faculty at Somewhere, I completed my PhD at MIT and was a postdoctoral fellow at Stanford's Human-Centered AI Institute. I have been awarded the NSF CAREER Award and the Young Investigator Prize from the Cognitive Science Society.",
-  bio_3: "Outside of research, I am deeply committed to open science, reproducibility, and making academic knowledge accessible to broader audiences.",
+  bio_1: "I am a <strong>Postdoctoral Research Fellow</strong> at the Center for Precision Psychiatry at Massachusetts General Hospital and Harvard Medical School. My work sits at the intersection of clinical AI, psychiatric genetics, and epidemiology.",
+  bio_2: "I completed my DPhil in AI for Biomedical Sciences at the University of Oxford as a National Institutes of Health Oxford-Cambridge Scholar, and hold a B.Sc. in Electrical Engineering from the University of Florida, where I graduated Summa Cum Laude.",
+  bio_3: "My current research focuses on developing machine learning methods to calibrate polygenic scores to individual environmental contexts, with the goal of improving personalized risk prediction for psychiatric conditions.",
 
-  // ── STATS
   stats: [
-    { number: "42",   label: "Publications" },
-    { number: "1.2k", label: "Citations"    },
-    { number: "8",    label: "Years Active" },
-    { number: "5",    label: "Grants"       },
+    { number: "7",    label: "Publications" },
+    { number: "150+", label: "Citations"    },
+    { number: "6",    label: "Years Active" },
+    { number: "3",    label: "Fellowships"  },
   ],
 
-  // ── RESEARCH INTERESTS (add or remove lines)
   interests: [
-    "Clinical AI",
+    "Artificial Intelligence",
     "Psychiatric Genetics",
-    "Natural Language Processing",
     "Mental Health Epidemiology",
+    "Cognitive Neuroscience" 
   ],
 
-  // ── EDUCATION (most recent first)
   education: [
+    { degree: "Postdoc, Precision and Genomic Medicine", institution: "Harvard Medical School, Current" },
     { degree: "DPhil, AI for Biomedical Sciences", institution: "University of Oxford, 2023" },
     { degree: "BSc, Electrical Engineering", institution: "University of Florida, 2018" },
   ],
 
-  // ── SOCIAL LINKS (set to "" to hide)
   links: [
     { label: "Google Scholar", url: "https://scholar.google.com" },
     { label: "ORCID",         url: "https://orcid.org" },
@@ -238,34 +272,27 @@ const PROFILE = {
   ],
 };
 
-/* ============================================================
-   RENDER — no need to edit below this line
-   ============================================================ */
 function buildSidebar(p) {
   const el = document.getElementById('sidebar');
 
-  // Headshot
   el.innerHTML += `
     <div class="headshot-wrap">
       <div class="headshot-offset"></div>
       <img class="headshot-img" src="${p.headshot}" alt="${p.name_line1} ${p.name_line2}"/>
     </div>`;
 
-  // Interests
   el.innerHTML += `
     <div class="sidebar-block">
       <h3>Research Interests</h3>
       <ul>${p.interests.map(i => `<li>${i}</li>`).join('')}</ul>
     </div>`;
 
-  // Education
   el.innerHTML += `
     <div class="sidebar-block">
       <h3>Education</h3>
       ${p.education.map(e => `<p><strong style="color:var(--black);font-weight:500">${e.degree}</strong><br>${e.institution}</p>`).join('')}
     </div>`;
 
-  // Links
   el.innerHTML += `
     <div class="sidebar-block">
       <h3>Links</h3>
@@ -279,20 +306,17 @@ function buildSidebar(p) {
 function buildMain(p) {
   const el = document.getElementById('main');
 
-  // Hero name
   el.innerHTML += `
     <p class="hero-tag">${p.title} · ${p.university}</p>
     <h1 class="hero-name">${p.name_line1}<br><em>${p.name_line2}</em></h1>
     <div class="divider"></div>`;
 
-  // Bio paragraphs (auto-discovers bio_1, bio_2, …)
   let bioHTML = '<div class="bio-text">';
   let i = 1;
   while (p[`bio_${i}`]) { bioHTML += `<p>${p[`bio_${i}`]}</p>`; i++; }
   bioHTML += '</div>';
   el.innerHTML += bioHTML;
 
-  // Stats
   el.innerHTML += `
     <div class="stats-row">
       ${p.stats.map(s => `
@@ -300,6 +324,21 @@ function buildMain(p) {
           <span class="stat-n">${s.number}</span>
           <span class="stat-l">${s.label}</span>
         </div>`).join('')}
+    </div>`;
+
+  // Talk section
+  el.innerHTML += `
+    <div class="talk-section">
+      <p class="talk-label">Featured Talk</p>
+      <h2 class="talk-title">Listen to my talk at the Broad Institute on AI in Medicine</h2>
+      <div class="talk-video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/BpogXKJgrr4"
+          title="Broad Institute Talk — AI in Medicine"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>`;
 
   document.title = `Dr. ${p.name_line1} ${p.name_line2}`;
