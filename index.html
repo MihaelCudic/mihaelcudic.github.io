@@ -247,7 +247,7 @@ const PROFILE = {
   stats: [
     { number: "7",    label: "Publications" },
     { number: "6",    label: "Years Active" },
-    { number: "> $100K",    label: "Grants"  },
+    { number: ">$100k",    label: "Grants"  },
   ],
 
   interests: [
@@ -312,7 +312,7 @@ function buildMain(p) {
   const el = document.getElementById('main');
 
   el.innerHTML += `
-    <p class="hero-tag">${p.title}</p>
+    <p class="hero-tag">${p.title} ·</p>
     <p class="hero-tag">${p.university}</p>
     <h1 class="hero-name">${p.name_line1}<br><em>${p.name_line2}</em></h1>
     <div class="divider"></div>`;
@@ -336,7 +336,7 @@ function buildMain(p) {
   el.innerHTML += `
     <div class="talk-section">
       <p class="talk-label">Featured Talk</p>
-      <h2 class="talk-title">Listen to my talk at the Broad Institute on AI in Medicine</h2>
+      <h2 class="talk-title">Listen to my talk at the Broad Institute on AI in Medicine!</h2>
       <div class="talk-video-wrap">
         <iframe
           src="https://www.youtube.com/embed/BpogXKJgrr4"
