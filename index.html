@@ -1,812 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dr. Jane Smith — Academic</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Dr. Mihael Cudic</title>
+  <link rel="stylesheet" href="style.css"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #0a0a0a;
-      --white: #f7f5f0;
-      --accent: #c8401a;
-      --mid: #4a4a4a;
-      --light: #e8e4dd;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--black);
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 4rem;
-      background: var(--white);
-      border-bottom: 1.5px solid var(--black);
-    }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-decoration: none;
-      color: var(--black);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--mid);
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-
-    /* HERO */
-    #hero {
-      min-height: 100vh;
+    /* ── ABOUT-SPECIFIC ─────────────────────────────────────── */
+    .about-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 72px;
+      grid-template-columns: 340px 1fr;
+      flex: 1;
     }
 
-    .hero-left {
+    /* LEFT COLUMN */
+    .about-sidebar {
+      border-right: var(--border);
+      padding: 3rem 2.5rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 6rem 4rem 6rem 4rem;
-      border-right: 1.5px solid var(--black);
+      gap: 2.5rem;
+    }
+
+    .headshot-wrap {
+      position: relative;
+      width: 220px;
+    }
+
+    .headshot-offset {
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 220px; height: 260px;
+      border: 1.5px solid var(--accent);
+    }
+
+    .headshot-img {
+      position: relative;
+      z-index: 1;
+      width: 220px;
+      height: 260px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      filter: grayscale(10%);
+    }
+
+    .sidebar-block h3 {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .sidebar-block p,
+    .sidebar-block li {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.75;
+    }
+
+    .sidebar-block ul { list-style: none; }
+    .sidebar-block li::before { content: '— '; color: var(--accent); }
+
+    .sidebar-links { display: flex; flex-direction: column; gap: 0.4rem; }
+    .sidebar-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.15s;
+    }
+
+    .sidebar-links a::before { content: '↗'; color: var(--accent); }
+    .sidebar-links a:hover { color: var(--accent); }
+
+    /* RIGHT COLUMN */
+    .about-main {
+      padding: 3rem 4rem;
+      max-width: 760px;
     }
 
     .hero-tag {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 1.5rem;
     }
 
     .hero-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3rem, 5vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.0;
+      font-weight: 600;
+      line-height: 0.95;
       letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    .hero-title {
-      font-size: 1.05rem;
-      font-weight: 300;
-      color: var(--mid);
-      max-width: 38ch;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.75rem;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1.5px solid var(--black);
-      transition: all 0.2s;
-    }
-
-    .btn-solid {
-      background: var(--black);
-      color: var(--white);
-    }
-
-    .btn-solid:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--black);
-    }
-
-    .btn-outline:hover {
-      background: var(--black);
-      color: var(--white);
-    }
-
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 4rem 4rem;
-      background: var(--black);
-      color: var(--white);
-      position: relative;
-      overflow: hidden;
-      gap: 2.5rem;
-    }
-
-    /* HEADSHOT */
-    .headshot-container {
-      position: relative;
-      align-self: flex-start;
-    }
-
-    .headshot-frame {
-      width: 200px;
-      height: 200px;
-      border: 2px solid var(--accent);
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 0;
-    }
-
-    .headshot-img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-      position: relative;
-      z-index: 1;
-      filter: grayscale(20%);
-    }
-
-    .headshot-placeholder {
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px dashed rgba(255,255,255,0.2);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      position: relative;
-      z-index: 1;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .headshot-placeholder:hover {
-      background: rgba(255,255,255,0.08);
-    }
-
-    .headshot-placeholder svg {
-      opacity: 0.3;
-    }
-
-    .headshot-placeholder span {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    #headshot-input { display: none; }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      font-weight: 700;
+    .hero-name em {
+      font-style: italic;
       color: var(--accent);
-      line-height: 1;
     }
 
-    .stat-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 0.4rem;
+    .divider {
+      width: 40px;
+      height: 1.5px;
+      background: var(--black);
+      margin-bottom: 2rem;
     }
 
-    .hero-affiliation {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.8;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 6rem 4rem;
-      border-top: 1.5px solid var(--black);
-      animation: fadeUp 0.6s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .section-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3vw, 3rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    /* ABOUT */
-    #about .about-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 6rem;
-      align-items: start;
-    }
-
-    .about-bio p {
-      font-size: 1.08rem;
-      line-height: 1.85;
+    .bio-text p {
+      font-size: 0.95rem;
+      line-height: 1.95;
       color: var(--mid);
       margin-bottom: 1.25rem;
     }
 
-    .about-bio p strong {
+    .bio-text p strong {
       color: var(--black);
       font-weight: 500;
     }
 
-    .about-sidebar h3 {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1rem;
-      margin-top: 2rem;
-    }
-
-    .about-sidebar h3:first-child { margin-top: 0; }
-
-    .about-sidebar p, .about-sidebar li {
-      font-size: 0.9rem;
-      color: var(--mid);
-      line-height: 1.7;
-    }
-
-    .about-sidebar ul { list-style: none; }
-
-    .about-sidebar li::before {
-      content: '→ ';
-      color: var(--accent);
-    }
-
-    /* RESEARCH */
-    #research .research-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+    .stats-row {
+      display: flex;
       gap: 0;
-      border: 1.5px solid var(--black);
+      margin-top: 3rem;
+      border-top: var(--border);
+      border-bottom: var(--border);
     }
 
-    .research-card {
-      padding: 2.5rem;
-      border-right: 1.5px solid var(--black);
-      transition: background 0.25s;
+    .stat {
+      flex: 1;
+      padding: 1.5rem 0;
+      border-right: var(--border);
+      text-align: center;
     }
 
-    .research-card:last-child { border-right: none; }
-    .research-card:hover { background: var(--light); }
+    .stat:last-child { border-right: none; }
 
-    .research-card-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.75rem;
       font-weight: 700;
-      color: var(--light);
-      -webkit-text-stroke: 1.5px var(--black);
-      margin-bottom: 1.5rem;
+      color: var(--accent);
       line-height: 1;
+      display: block;
     }
 
-    .research-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-
-    .research-card p {
-      font-size: 0.88rem;
-      color: var(--mid);
-      line-height: 1.7;
-    }
-
-    /* PUBLICATIONS */
-    #publications .pub-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .pub-item {
-      display: grid;
-      grid-template-columns: 80px 1fr auto;
-      align-items: start;
-      gap: 2rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--light);
-      transition: background 0.2s;
-    }
-
-    .pub-item:first-child { border-top: 1.5px solid var(--black); }
-    .pub-item:last-child { border-bottom: 1.5px solid var(--black); }
-
-    .pub-year {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      padding-top: 0.15rem;
-    }
-
-    .pub-details h3 {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 0.3rem;
-      line-height: 1.4;
-    }
-
-    .pub-details .pub-venue {
-      font-size: 0.82rem;
-      color: var(--mid);
-      font-style: italic;
-      margin-bottom: 0.3rem;
-    }
-
-    .pub-details .pub-authors {
-      font-size: 0.82rem;
-      color: var(--mid);
-    }
-
-    .pub-tag {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.75rem;
-      border: 1px solid var(--black);
-      white-space: nowrap;
-      align-self: start;
-    }
-
-    .pub-tag.featured {
-      background: var(--black);
-      color: var(--white);
-    }
-
-    /* TEACHING */
-    #teaching .courses-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      background: var(--black);
-      border: 1.5px solid var(--black);
-    }
-
-    .course-card {
-      background: var(--white);
-      padding: 2rem 2.5rem;
-      transition: background 0.2s;
-    }
-
-    .course-card:hover { background: var(--light); }
-
-    .course-code {
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .course-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .course-card p {
-      font-size: 0.85rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-
-    /* CONTACT */
-    #contact {
-      background: var(--black);
-      color: var(--white);
-      border-top: none;
-    }
-
-    #contact .section-title { color: var(--white); }
-    #contact .section-number { color: var(--accent); }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-    }
-
-    .contact-info h3 {
-      font-size: 0.75rem;
+    .stat-l {
+      font-size: 0.62rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 0.75rem;
-      margin-top: 2rem;
-    }
-
-    .contact-info h3:first-child { margin-top: 0; }
-
-    .contact-info p, .contact-info a {
-      color: var(--white);
-      font-size: 0.95rem;
-      text-decoration: none;
-      line-height: 1.7;
-    }
-
-    .contact-info a:hover { color: var(--accent); }
-
-    .contact-tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 2rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .social-link {
-      display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: all 0.2s;
-    }
-
-    .social-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 1.5rem 4rem;
-      border-top: 1.5px solid rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--black);
-      color: rgba(255,255,255,0.3);
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
+      color: var(--mid);
+      display: block;
+      margin-top: 0.3rem;
     }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      nav { padding: 1rem 2rem; }
-      section { padding: 4rem 2rem; }
-
-      #hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 5rem 2rem 3rem; border-right: none; border-bottom: 1.5px solid var(--black); }
-      .hero-right { padding: 3rem 2rem 4rem; }
-
-      #about .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      #research .research-grid { grid-template-columns: 1fr; }
-      .research-card { border-right: none; border-bottom: 1.5px solid var(--black); }
-      .research-card:last-child { border-bottom: none; }
-      #teaching .courses-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .about-layout { grid-template-columns: 1fr; }
+      .about-sidebar { border-right: none; border-bottom: var(--border); }
+      .about-main { padding: 2rem 1.25rem; }
+      .stats-row { flex-wrap: wrap; }
+      .stat { min-width: 50%; }
     }
   </style>
 </head>
 <body>
+<div class="page">
+  <div class="about-layout">
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#">Dr. Jane Smith</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#teaching">Teaching</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- SIDEBAR -->
+    <aside class="about-sidebar" id="sidebar"></aside>
 
-  <!-- HERO -->
-  <section id="hero" style="padding:0; border:none;">
-    <div class="hero-left">
-      <p class="hero-tag">Associate Professor · University of Somewhere</p>
-      <h1 class="hero-name">Dr.<br>Jane<br>Smith</h1>
-      <p class="hero-title">Researching the intersection of cognitive science and computational modeling. Building bridges between theory and data.</p>
-      <div class="hero-cta">
-        <a href="#research" class="btn btn-solid">View Research</a>
-        <a href="cv.pdf" class="btn btn-outline">Download CV</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <!-- HEADSHOT -->
-      <div class="headshot-container">
-        <div class="headshot-frame"></div>
-        <div class="headshot-placeholder" onclick="document.getElementById('headshot-input').click()" id="headshot-placeholder">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-            <circle cx="12" cy="8" r="4"/>
-            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-          </svg>
-          <span>Click to upload<br>your photo</span>
-        </div>
-        <img class="headshot-img" id="headshot-img" src="" alt="Dr. Jane Smith" style="display:none;"/>
-        <input type="file" id="headshot-input" accept="image/*"/>
-      </div>
+    <!-- MAIN -->
+    <main class="about-main" id="main"></main>
 
-      <div class="hero-stats">
-        <div>
-          <div class="stat-number">42</div>
-          <div class="stat-label">Publications</div>
-        </div>
-        <div>
-          <div class="stat-number">1.2k</div>
-          <div class="stat-label">Citations</div>
-        </div>
-        <div>
-          <div class="stat-number">8</div>
-          <div class="stat-label">Years Active</div>
-        </div>
-        <div>
-          <div class="stat-number">5</div>
-          <div class="stat-label">Grants Awarded</div>
-        </div>
-      </div>
-      <p class="hero-affiliation">
-        Department of Cognitive Science<br>
-        University of Somewhere<br>
-        Sometown, ST 00000
-      </p>
-    </div>
-  </section>
+  </div>
+</div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-header">
-      <span class="section-number">01</span>
-      <h2 class="section-title">About</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-bio">
-        <p>I am an <strong>Associate Professor</strong> in the Department of Cognitive Science at the University of Somewhere, where I lead the Computational Mind Lab. My work sits at the intersection of cognitive psychology, neuroscience, and machine learning.</p>
-        <p>Before joining the faculty at Somewhere, I completed my PhD at MIT and was a postdoctoral fellow at Stanford's Human-Centered AI Institute. I have been awarded the NSF CAREER Award and the Young Investigator Prize from the Cognitive Science Society.</p>
-        <p>Outside of research, I am deeply committed to open science, reproducibility, and making academic knowledge accessible to broader audiences.</p>
-      </div>
-      <div class="about-sidebar">
-        <h3>Interests</h3>
-        <ul>
-          <li>Cognitive Modeling</li>
-          <li>Bayesian Inference</li>
-          <li>Language &amp; Memory</li>
-          <li>Human-AI Interaction</li>
-        </ul>
-        <h3>Education</h3>
-        <p>PhD, Cognitive Science<br>MIT, 2016</p>
-        <p style="margin-top:0.5rem">BSc, Psychology &amp; Mathematics<br>University of Chicago, 2011</p>
-      </div>
-    </div>
-  </section>
+<script src="nav.js"></script>
+<script>
+/* ============================================================
+   EDIT YOUR PROFILE HERE
+   ============================================================ */
+const PROFILE = {
+  name_line1: "Mihael",
+  name_line2: "Cudic",
+  title: "Associate Professor",
+  department: "Department of Cognitive Science",
+  university: "University of Somewhere",
+  email: "mihael.cudic@somewhere.edu",
+  office: "Cognitive Science Bldg, Room 314",
+  office_hours: "Tuesdays 2–4 pm, or by appointment",
+  cv: "CV.pdf",
+  headshot: "headshot.jpg",
 
-  <!-- RESEARCH -->
-  <section id="research">
-    <div class="section-header">
-      <span class="section-number">02</span>
-      <h2 class="section-title">Research</h2>
-    </div>
-    <div class="research-grid">
-      <div class="research-card">
-        <div class="research-card-number">01</div>
-        <h3>Computational Cognition</h3>
-        <p>Developing Bayesian models of human reasoning and decision-making under uncertainty, with applications to clinical and educational settings.</p>
-      </div>
-      <div class="research-card">
-        <div class="research-card-number">02</div>
-        <h3>Language &amp; Memory</h3>
-        <p>Investigating how language shapes and retrieves episodic memories, combining behavioral experiments with neuroimaging methods.</p>
-      </div>
-      <div class="research-card">
-        <div class="research-card-number">03</div>
-        <h3>Human-AI Collaboration</h3>
-        <p>Studying how humans and AI systems can effectively collaborate on complex cognitive tasks, with a focus on trust and error recovery.</p>
-      </div>
-    </div>
-  </section>
+  // ── BIO PARAGRAPHS (add more bio_N as needed)
+  bio_1: "I am an <strong>Associate Professor</strong> in the Department of Cognitive Science at the University of Somewhere, where I lead the Computational Mind Lab. My work sits at the intersection of cognitive psychology, neuroscience, and machine learning.",
+  bio_2: "Before joining the faculty at Somewhere, I completed my PhD at MIT and was a postdoctoral fellow at Stanford's Human-Centered AI Institute. I have been awarded the NSF CAREER Award and the Young Investigator Prize from the Cognitive Science Society.",
+  bio_3: "Outside of research, I am deeply committed to open science, reproducibility, and making academic knowledge accessible to broader audiences.",
 
-  <!-- PUBLICATIONS -->
-  <section id="publications">
-    <div class="section-header">
-      <span class="section-number">03</span>
-      <h2 class="section-title">Publications</h2>
-    </div>
-    <div class="pub-list">
-      <div class="pub-item">
-        <div class="pub-year">2024</div>
-        <div class="pub-details">
-          <h3>Bayesian models of memory reconsolidation under uncertainty</h3>
-          <p class="pub-venue">Nature Human Behaviour</p>
-          <p class="pub-authors">Smith, J., Patel, R., &amp; Johnson, L.</p>
-        </div>
-        <span class="pub-tag featured">Featured</span>
-      </div>
-      <div class="pub-item">
-        <div class="pub-year">2023</div>
-        <div class="pub-details">
-          <h3>Language-mediated priming in episodic memory retrieval</h3>
-          <p class="pub-venue">Psychological Review</p>
-          <p class="pub-authors">Smith, J. &amp; Chen, W.</p>
-        </div>
-        <span class="pub-tag">Journal</span>
-      </div>
-      <div class="pub-item">
-        <div class="pub-year">2023</div>
-        <div class="pub-details">
-          <h3>Trust calibration in human-AI decision systems</h3>
-          <p class="pub-venue">Proceedings of CHI 2023</p>
-          <p class="pub-authors">Kim, A., Smith, J., &amp; Morales, D.</p>
-        </div>
-        <span class="pub-tag">Conference</span>
-      </div>
-      <div class="pub-item">
-        <div class="pub-year">2022</div>
-        <div class="pub-details">
-          <h3>A unified framework for cognitive load and working memory</h3>
-          <p class="pub-venue">Cognition</p>
-          <p class="pub-authors">Smith, J., Torres, M., &amp; Liu, Y.</p>
-        </div>
-        <span class="pub-tag">Journal</span>
-      </div>
-    </div>
-  </section>
+  // ── STATS
+  stats: [
+    { number: "42",   label: "Publications" },
+    { number: "1.2k", label: "Citations"    },
+    { number: "8",    label: "Years Active" },
+    { number: "5",    label: "Grants"       },
+  ],
 
-  <!-- TEACHING -->
-  <section id="teaching">
-    <div class="section-header">
-      <span class="section-number">04</span>
-      <h2 class="section-title">Teaching</h2>
-    </div>
-    <div class="courses-grid">
-      <div class="course-card">
-        <div class="course-code">COGS 101 · Undergraduate</div>
-        <h3>Introduction to Cognitive Science</h3>
-        <p>A broad survey of the interdisciplinary field of cognitive science, covering perception, memory, language, and reasoning.</p>
-      </div>
-      <div class="course-card">
-        <div class="course-code">COGS 310 · Undergraduate</div>
-        <h3>Memory &amp; Cognition</h3>
-        <p>An advanced course on the psychology and neuroscience of human memory systems, from encoding to retrieval.</p>
-      </div>
-      <div class="course-card">
-        <div class="course-code">COGS 510 · Graduate</div>
-        <h3>Computational Models of Mind</h3>
-        <p>An intensive graduate seminar on probabilistic and neural models of cognition, with a hands-on modeling lab component.</p>
-      </div>
-      <div class="course-card">
-        <div class="course-code">COGS 590 · Graduate</div>
-        <h3>Research Methods in Cognitive Science</h3>
-        <p>Training in experimental design, open science practices, and statistical modeling for graduate researchers.</p>
-      </div>
-    </div>
-  </section>
+  // ── RESEARCH INTERESTS (add or remove lines)
+  interests: [
+    "Cognitive Modeling",
+    "Bayesian Inference",
+    "Language & Memory",
+    "Human-AI Interaction",
+  ],
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-header">
-      <span class="section-number">05</span>
-      <h2 class="section-title">Contact</h2>
-    </div>
-    <div class="contact-grid">
-      <div>
-        <p class="contact-tagline">Interested in collaborating or joining the lab? Get in touch.</p>
-        <p style="color:rgba(255,255,255,0.5); font-size:0.9rem; line-height:1.8;">I welcome inquiries from prospective PhD students and postdoctoral researchers. Please include a CV and a brief statement of research interests.</p>
-        <div class="social-links">
-          <a href="#" class="social-link">Google Scholar</a>
-          <a href="#" class="social-link">Twitter / X</a>
-          <a href="#" class="social-link">GitHub</a>
-          <a href="#" class="social-link">ORCID</a>
-        </div>
+  // ── EDUCATION (most recent first)
+  education: [
+    { degree: "PhD, Cognitive Science", institution: "MIT, 2016" },
+    { degree: "BSc, Psychology & Mathematics", institution: "University of Chicago, 2011" },
+  ],
+
+  // ── SOCIAL LINKS (set to "" to hide)
+  links: [
+    { label: "Google Scholar", url: "https://scholar.google.com" },
+    { label: "ORCID",         url: "https://orcid.org" },
+    { label: "GitHub",        url: "https://github.com/mihaelcudic" },
+    { label: "Twitter / X",   url: "https://twitter.com" },
+  ],
+};
+
+/* ============================================================
+   RENDER — no need to edit below this line
+   ============================================================ */
+function buildSidebar(p) {
+  const el = document.getElementById('sidebar');
+
+  // Headshot
+  el.innerHTML += `
+    <div class="headshot-wrap">
+      <div class="headshot-offset"></div>
+      <img class="headshot-img" src="${p.headshot}" alt="${p.name_line1} ${p.name_line2}"/>
+    </div>`;
+
+  // Interests
+  el.innerHTML += `
+    <div class="sidebar-block">
+      <h3>Research Interests</h3>
+      <ul>${p.interests.map(i => `<li>${i}</li>`).join('')}</ul>
+    </div>`;
+
+  // Education
+  el.innerHTML += `
+    <div class="sidebar-block">
+      <h3>Education</h3>
+      ${p.education.map(e => `<p><strong style="color:var(--black);font-weight:500">${e.degree}</strong><br>${e.institution}</p>`).join('')}
+    </div>`;
+
+  // Links
+  el.innerHTML += `
+    <div class="sidebar-block">
+      <h3>Links</h3>
+      <div class="sidebar-links">
+        ${p.links.filter(l => l.url).map(l => `<a href="${l.url}" target="_blank">${l.label}</a>`).join('')}
+        <a href="${p.cv}">Download CV</a>
       </div>
-      <div class="contact-info">
-        <h3>Email</h3>
-        <a href="mailto:jane.smith@somewhere.edu">jane.smith@somewhere.edu</a>
-        <h3>Office</h3>
-        <p>Cognitive Science Building, Room 314<br>University of Somewhere<br>Sometown, ST 00000</p>
-        <h3>Office Hours</h3>
-        <p>Tuesdays 2–4pm, or by appointment</p>
-      </div>
-    </div>
-  </section>
+    </div>`;
+}
 
-  <footer>
-    <span>© 2025 Dr. Jane Smith</span>
-    <span>Built with GitHub Pages</span>
-  </footer>
+function buildMain(p) {
+  const el = document.getElementById('main');
 
-  <script>
-    const input = document.getElementById('headshot-input');
-    const img = document.getElementById('headshot-img');
-    const placeholder = document.getElementById('headshot-placeholder');
+  // Hero name
+  el.innerHTML += `
+    <p class="hero-tag">${p.title} · ${p.university}</p>
+    <h1 class="hero-name">${p.name_line1}<br><em>${p.name_line2}</em></h1>
+    <div class="divider"></div>`;
 
-    input.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const url = URL.createObjectURL(file);
-      img.src = url;
-      img.style.display = 'block';
-      placeholder.style.display = 'none';
-    });
-  </script>
+  // Bio paragraphs (auto-discovers bio_1, bio_2, …)
+  let bioHTML = '<div class="bio-text">';
+  let i = 1;
+  while (p[`bio_${i}`]) { bioHTML += `<p>${p[`bio_${i}`]}</p>`; i++; }
+  bioHTML += '</div>';
+  el.innerHTML += bioHTML;
+
+  // Stats
+  el.innerHTML += `
+    <div class="stats-row">
+      ${p.stats.map(s => `
+        <div class="stat">
+          <span class="stat-n">${s.number}</span>
+          <span class="stat-l">${s.label}</span>
+        </div>`).join('')}
+    </div>`;
+
+  document.title = `Dr. ${p.name_line1} ${p.name_line2}`;
+}
+
+buildSidebar(PROFILE);
+buildMain(PROFILE);
+</script>
 </body>
 </html>

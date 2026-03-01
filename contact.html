@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Dr. Mihael Cudic</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── CONTACT-SPECIFIC ───────────────────────────────────── */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+    }
+
+    /* LEFT — big statement */
+    .contact-left {
+      padding: 5rem 4rem;
+      border-right: var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .contact-tagline em { font-style: italic; color: var(--accent); }
+
+    .contact-blurb {
+      font-size: 0.85rem;
+      color: var(--mid);
+      line-height: 1.9;
+      max-width: 48ch;
+      margin-bottom: 3rem;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border: var(--border);
+      text-decoration: none;
+      color: var(--black);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.15s;
+    }
+
+    .social-btn:hover { background: var(--black); color: var(--white); }
+    .social-btn::after { content: '↗'; margin-left: 0.5rem; }
+
+    /* RIGHT — details */
+    .contact-right {
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    .contact-block h3 {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-block p,
+    .contact-block a {
+      font-size: 0.9rem;
+      color: var(--black);
+      text-decoration: none;
+      line-height: 1.8;
+      display: block;
+    }
+
+    .contact-block a:hover { color: var(--accent); }
+
+    .email-link {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem !important;
+      font-weight: 600;
+    }
+
+    .prospective-box {
+      border: var(--border);
+      padding: 1.5rem;
+      background: var(--light);
+    }
+
+    .prospective-box h3 {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .prospective-box p {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 860px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-left { border-right: none; border-bottom: var(--border); padding: 3rem 1.25rem; }
+      .contact-right { padding: 3rem 1.25rem; }
+      .social-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-header">
+    <span class="page-header-num">05</span>
+    <h1>Contact</h1>
+  </div>
+
+  <div class="contact-layout">
+
+    <!-- LEFT -->
+    <div class="contact-left" id="contact-left"></div>
+
+    <!-- RIGHT -->
+    <div class="contact-right" id="contact-right"></div>
+
+  </div>
+
+</div>
+
+<script src="nav.js"></script>
+<script>
+/* ============================================================
+   CONTACT DETAILS — edit here
+   ============================================================ */
+const CONTACT = {
+  tagline_1: "Interested in collaborating",
+  tagline_2: "or joining the lab?",
+  tagline_accent: "Get in touch.",
+  blurb: "I welcome inquiries from prospective PhD students and postdoctoral researchers. Please include a CV and a brief statement of research interests when reaching out.",
+
+  email: "mihael.cudic@somewhere.edu",
+  office: "Cognitive Science Building, Room 314\nUniversity of Somewhere\nSometown, ST 00000",
+  office_hours: "Tuesdays 2–4 pm, or by appointment",
+
+  links: [
+    { label: "Google Scholar", url: "https://scholar.google.com" },
+    { label: "ORCID",         url: "https://orcid.org" },
+    { label: "GitHub",        url: "https://github.com/mihaelcudic" },
+    { label: "Twitter / X",   url: "https://twitter.com" },
+  ],
+
+  prospective_note: "I am currently accepting PhD students for the 2025–26 cycle. If you are interested in working with me, please read recent papers from the lab before reaching out and mention specific projects you are excited about.",
+};
+
+/* ── RENDER ───────────────────────────────────────────────── */
+const left = document.getElementById('contact-left');
+const right = document.getElementById('contact-right');
+
+left.innerHTML = `
+  <h2 class="contact-tagline">
+    ${CONTACT.tagline_1}<br>${CONTACT.tagline_2}<br>
+    <em>${CONTACT.tagline_accent}</em>
+  </h2>
+  <p class="contact-blurb">${CONTACT.blurb}</p>
+  <div class="social-grid">
+    ${CONTACT.links.filter(l => l.url).map(l =>
+      `<a class="social-btn" href="${l.url}" target="_blank">${l.label}</a>`
+    ).join('')}
+  </div>`;
+
+right.innerHTML = `
+  <div class="contact-block">
+    <h3>Email</h3>
+    <a class="email-link" href="mailto:${CONTACT.email}">${CONTACT.email}</a>
+  </div>
+  <div class="contact-block">
+    <h3>Office</h3>
+    <p>${CONTACT.office.replace(/\n/g, '<br>')}</p>
+  </div>
+  <div class="contact-block">
+    <h3>Office Hours</h3>
+    <p>${CONTACT.office_hours}</p>
+  </div>
+  <div class="prospective-box">
+    <h3>Prospective Students</h3>
+    <p>${CONTACT.prospective_note}</p>
+  </div>`;
+</script>
+</body>
+</html>
