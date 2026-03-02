@@ -61,7 +61,7 @@
 
     .course-row {
       display: grid;
-      grid-template-columns: 120px 1fr auto;
+      grid-template-columns: 1fr auto;
       align-items: start;
       gap: 2rem;
       padding: 2rem 3rem;
@@ -72,23 +72,12 @@
     .course-row:hover { background: var(--light); }
     .course-row.hidden { display: none; }
 
-    .course-code-wrap {
-      padding-top: 0.15rem;
-    }
-
-    .course-code {
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      font-weight: 500;
-      color: var(--black);
-      display: block;
-    }
-
-    .course-year-tag {
-      font-size: 0.65rem;
-      color: var(--accent);
-      margin-top: 0.3rem;
-      display: block;
+    .course-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.3rem;
+      flex-wrap: wrap;
     }
 
     .course-title {
@@ -96,14 +85,75 @@
       font-size: 1.25rem;
       font-weight: 600;
       line-height: 1.25;
-      margin-bottom: 0.5rem;
     }
+
+    .course-code {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+
+    .course-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .course-institution {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .course-year {
+      font-size: 0.68rem;
+      color: var(--accent);
+    }
+
+    .course-role {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+
+    .course-role.professor { color: var(--accent); border-color: var(--accent); font-weight: 600; }
+    .course-role.ta { color: var(--mid); border-color: var(--mid); }
 
     .course-desc {
       font-size: 0.82rem;
       color: var(--mid);
       line-height: 1.75;
+      margin-bottom: 0.5rem;
     }
+
+    .course-rating {
+      font-size: 0.72rem;
+      color: var(--mid);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .course-rating strong { color: var(--black); }
+
+    .course-syllabus {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border-bottom: 1px solid var(--black);
+      transition: color 0.15s;
+      margin-left: 0.75rem;
+    }
+
+    .course-syllabus:hover { color: var(--accent); border-color: var(--accent); }
 
     .course-level-tag {
       font-size: 0.62rem;
@@ -164,35 +214,52 @@
    ============================================================ */
 const COURSES = [
 
-  // ── ADD NEW COURSES HERE (at the top) ────────────────────── //
-
   {
     code: "IDH3931",
     level: "undergraduate",
-    title: "Artificial Intelligence Applications for Psychiatry @ University of Florida",
+    role: "professor",
+    roleLabel: "Adjunct Honors Dunlevie Professor",
+    title: "AI Applications for Psychiatry",
+    institution: "University of Florida",
     description: "ML methods for medical data, deep learning and generative AI, neurobiology and clinical psychiatry, and AI-driven approaches to understanding and predicting psychiatric conditions.",
     years: "2024",
+    syllabus: "https://www.honors.ufl.edu/media/honorsufledu/syllabi/spring-24/IDH3931-MC01_30214-AI-Applications-for-Psychiatry-Cudic_syllabus.pdf",
   },
   {
     code: "",
     level: "undergraduate",
-    title: "Engineering Computation @ University of Oxford",
+    role: "ta",
+    roleLabel: "Teaching Assistant",
+    title: "Engineering Computation",
+    institution: "University of Oxford",
     description: "Numerical methods, optimization algorithms, and implementing machine learning fundamentals.",
     years: "2022",
+    rating: "",
+    syllabus: "",
   },
   {
     code: "EEL5840",
     level: "graduate",
-    title: "Elements of Machine Intelligence @ University of Florida",
+    role: "ta",
+    roleLabel: "Teaching Assistant",
+    title: "Elements of Machine Intelligence",
+    institution: "University of Florida",
     description: "Neural networks, pattern recognition, probabilistic models, and intelligent system design.",
     years: "2017",
+    rating: "",
+    syllabus: "",
   },
   {
     code: "EEL3111",
     level: "undergraduate",
-    title: "Circuits @ University of Florida",
+    role: "ta",
+    roleLabel: "Teaching Assistant",
+    title: "Circuits",
+    institution: "University of Florida",
     description: "Fundamental circuit theory, analysis techniques, and the behavior of electrical components and systems.",
     years: "2016",
+    rating: "",
+    syllabus: "",
   },
 
 ];
@@ -204,13 +271,30 @@ function renderCourses(courses) {
     const row = document.createElement('div');
     row.className = 'course-row';
     row.dataset.level = c.level;
+
+    const ratingHTML = c.rating
+      ? `<span class="course-rating">— <strong>${c.rating}</strong></span>`
+      : '';
+
+    const syllabusHTML = c.syllabus
+      ? `<a class="course-syllabus" href="${c.syllabus}" target="_blank">↗ Syllabus</a>`
+      : '';
+
+    const codeHTML = c.code ? `<span class="course-code">${c.code}</span>` : '';
+
     row.innerHTML = `
-      <div class="course-code-wrap">
-        <span class="course-code">${c.code}</span>
-        <span class="course-year-tag">${c.years}</span>
-      </div>
       <div>
-        <div class="course-title">${c.title}</div>
+        <div class="course-header">
+          <div class="course-title">${c.title}</div>
+          ${codeHTML}
+        </div>
+        <div class="course-meta">
+          <span class="course-role ${c.role}">${c.roleLabel}</span>
+          <span class="course-institution">${c.institution}</span>
+          <span class="course-year">${c.years}</span>
+          ${ratingHTML}
+          ${syllabusHTML}
+        </div>
         <p class="course-desc">${c.description}</p>
       </div>
       <span class="course-level-tag ${c.level}">${c.level}</span>`;
