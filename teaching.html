@@ -142,6 +142,37 @@
 
     .course-rating strong { color: var(--black); }
 
+    .course-rating-block {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-left: 2px solid var(--accent);
+      background: var(--light);
+    }
+
+    .course-rating-line {
+      font-size: 0.72rem;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+
+    .course-rating-line strong { color: var(--accent); }
+
+    .course-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    .course-quote-attr {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 0.3rem;
+    }
+
     .course-syllabus {
       font-size: 0.65rem;
       letter-spacing: 0.08em;
@@ -224,6 +255,9 @@ const COURSES = [
     description: "ML methods for medical data, deep learning and generative AI, neurobiology and clinical psychiatry, and AI-driven approaches to understanding and predicting psychiatric conditions.",
     years: "2024",
     syllabus: "https://www.honors.ufl.edu/media/honorsufledu/syllabi/spring-24/IDH3931-MC01_30214-AI-Applications-for-Psychiatry-Cudic_syllabus.pdf",
+    rating: "4.8 / 5.0",
+    quote: "The topics covered by the course were extremely engaging and interesting.",
+    quoteAttr: "Student evaluation",
   },
   {
     code: "",
@@ -272,30 +306,31 @@ function renderCourses(courses) {
     row.className = 'course-row';
     row.dataset.level = c.level;
 
-    const ratingHTML = c.rating
-      ? `<span class="course-rating">— <strong>${c.rating}</strong></span>`
-      : '';
+    const codeAndSyllabusHTML = [
+      c.code ? `<span class="course-code">${c.code}</span>` : '',
+      c.syllabus ? `<a class="course-syllabus" href="${c.syllabus}" target="_blank">↗ Syllabus</a>` : '',
+    ].filter(Boolean).join('');
 
-    const syllabusHTML = c.syllabus
-      ? `<a class="course-syllabus" href="${c.syllabus}" target="_blank">↗ Syllabus</a>`
-      : '';
-
-    const codeHTML = c.code ? `<span class="course-code">${c.code}</span>` : '';
+    const ratingBlockHTML = c.rating ? `
+      <div class="course-rating-block">
+        <div class="course-rating-line">Rating: <strong>${c.rating}</strong></div>
+        ${c.quote ? `<div class="course-quote">"${c.quote}"</div>
+        <div class="course-quote-attr">— ${c.quoteAttr || 'Student evaluation'}</div>` : ''}
+      </div>` : '';
 
     row.innerHTML = `
       <div>
         <div class="course-header">
           <div class="course-title">${c.title}</div>
-          ${codeHTML}
+          ${codeAndSyllabusHTML}
         </div>
         <div class="course-meta">
           <span class="course-role ${c.role}">${c.roleLabel}</span>
           <span class="course-institution">${c.institution}</span>
           <span class="course-year">${c.years}</span>
-          ${ratingHTML}
-          ${syllabusHTML}
         </div>
         <p class="course-desc">${c.description}</p>
+        ${ratingBlockHTML}
       </div>
       <span class="course-level-tag ${c.level}">${c.level}</span>`;
     list.appendChild(row);
@@ -317,4 +352,5 @@ document.querySelectorAll('.level-btn').forEach(btn => {
 renderCourses(COURSES);
 </script>
 </body>
+</html>
 </html>
