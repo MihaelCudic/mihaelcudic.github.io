@@ -313,7 +313,7 @@ function renderCourses(courses) {
 
     const ratingBlockHTML = c.rating ? `
       <div class="course-rating-block">
-        <div class="course-rating-line">Rating: <strong>${c.rating}</strong></div>
+        <div class="course-rating-line">Course Rating: <strong>${c.rating}</strong></div>
         ${c.quote ? `<div class="course-quote">"${c.quote}"</div>
         <div class="course-quote-attr">— ${c.quoteAttr || 'Student evaluation'}</div>` : ''}
       </div>` : '';
