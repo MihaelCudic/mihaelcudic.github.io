@@ -11,13 +11,11 @@
     /* Each theme is a full-width horizontal band */
     .theme {
       border-bottom: var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
     }
 
     /* Alternate image side */
-    .theme:nth-child(even) { direction: rtl; }
-    .theme:nth-child(even) > * { direction: ltr; }
+    .theme:nth-child(even) { flex-direction: row-reverse; }
 
     /* IMAGE PANEL */
     .theme-image {
@@ -25,6 +23,8 @@
       position: relative;
       overflow: hidden;
       background: #ffffff;
+      width: 50%;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -96,8 +96,9 @@
       padding: 3.5rem 4rem;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       gap: 1.5rem;
+      flex: 1;
+      align-self: flex-start;
     }
 
     .theme-index {
@@ -161,8 +162,8 @@
 
 
     @media (max-width: 860px) {
-      .theme { grid-template-columns: 1fr; direction: ltr; min-height: auto; }
-      .theme-image { min-height: 260px; border-right: none; border-bottom: var(--border); }
+      .theme { flex-direction: column !important; }
+      .theme-image { width: 100%; border-right: none; border-bottom: var(--border); }
       .theme:nth-child(even) .theme-image { border-left: none; border-bottom: var(--border); }
       .theme-content { padding: 2rem 1.25rem; }
     }
@@ -222,7 +223,7 @@ const THEMES = [
 
   {
     title: "Did COVID-19 Lockdowns Harm Mental Health — And For How Long?",
-    description: "COVID-19 containment policies led to widespread disruptions of daily life, with a growing body of evidence documenting their detrimental effects on mental health. However, it remains unclear to what extent these mental health outcomes are attributable specifically to containment policies rather than to other pandemic-related stressors (e.g., infections and deaths). When disentangling the effects of containment policies from those of the pandemic itself, we find insufficient evidence that prolonged containment policies in the first year of the pandemic had a lasting impact on population-level psychological distress.",
+    description: "Both the COVID-19 pandemic and the containment policies implemented to control it caused widespread disruption of daily life.  Disentangling the effects of these policies from the pandemic itself is essential for informing future public health responses. Using state-level data from over one million U.S. adults in the Behavioral Risk Factor Surveillance System, we applied three complementary causal inference approaches — synthetic control analysis, within-state fixed effects, and target trial emulation — to estimate the effect of lifting versus maintaining containment policies on psychological distress. Lifting full lockdowns was associated with immediate reductions in distress of approximately 5–6 percentage points, though effects attenuated within 60 days and were negligible at 90 days. These results suggest that extended containment policies were unlikely to account for the sustained increases in distress observed during the pandemic.",
     image: "images/covid_1.png",
     image_caption: "",
     papers: [
