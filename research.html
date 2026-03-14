@@ -205,18 +205,18 @@ const THEMES = [
 
   {
     title: "LLMs for Psychiatric Clinical Notes",
-    description: "Standardized depression assessments such as the PHQ-9 are administered infrequently in routine outpatient care — yet clinicians produce detailed notes at every encounter. Can large language models (LLMs) extract clinically meaningful depression severity from this unstructured text? Across 91,651 outpatient psychiatry notes from 8,287 patients, LLM-inferred depression severity demonstrated moderate correspondence with patient-reported PHQ-9 and stronger agreement with clinician chart review assessments. Notably, LLM-inferred scores predicted psychiatric emergency visits with accuracy comparable to patient-reported PHQ-9. These findings have implications for scalable, longitudinal phenotyping of depression severity to support genetic, pharmacoepidemiologic, and treatment effectiveness research using real-world clinical data.",
+    description: "Longitudinal measurement of depression severity in outpatient psychiatric care is limited by infrequent standardized assessments. Although psychiatric clinical notes capture illness burden and functional impairment, this information is rarely quantified for analysis. Using outpatient psychiatry notes from a large academic health system, we show that LLM-inferred depression severity moderately correlates with patient-reported PHQ-9, strongly aligns with clinician chart review, and predicts antidepressant switching and psychiatric emergency visits.",
     image: "images/LLM.png",   // e.g. "images/research-human-ai.jpg"
     image_caption: "",
     image_max_height: "450",  // e.g. 400 — max height in px. Leave "" to fill panel.
     papers: [
-      { title: "LLM-Inferred Depression Severity from Clinical Notes Predicts Psychiatric Emergency Visits", venue: "in preparation", url: "" },
+      { title: "Multi-Criteria Validation of LLM-Inferred Depression Severity from Outpatient Psychiatry Notes", venue: "medRxiv 2026", url: "https://www.medrxiv.org/content/10.64898/2026.03.11.26348066v1" },
     ],
   },
 
   {
     title: "Putting Genetics in Context",
-    description: "Polygenic scores offer a promising tool for individual disease risk stratification, yet their predictive validity is known to vary across ancestries and sociodemographic contexts. In an analysis of 375,000 UK Biobank participants with replication in the All of Us cohort, we examined how genetic risk estimates for seven common diseases — including depression — change across 106 intersecting combinations of sex, age, income, and lifestyle factors. Estimated odds ratios for high-PGS individuals varied by an average of 56% across intersectional contexts, with meaningful differences in absolute risk after adjusting for context prevalence. These findings suggest that future clinical applications of polygenic scores may require integration of contextual factors to improve both accuracy and equity in individual-level risk assessment.",
+    description: "The clinical utility of polygenic scores (PGS) is known to vary when training and test samples differ in ancestry, with recent work suggesting that sociodemographic differences can also impact PGS performance. However, the impact of belonging to multiple intersecting contexts on genetic risk remains understudied. Our findings show that intersectional contexts can have a sizable impact on relative genetic risk effect estimates, but a more moderate effect on absolute genetic risk.",
     image: "images/PGSinContext.png",   // e.g. "images/research-language.jpg"
     image_caption: "",
     image_max_height: "450",  // e.g. 400 — max height in px. Leave "" to fill panel.
@@ -226,13 +226,13 @@ const THEMES = [
   },
 
   {
-    title: "Did COVID-19 Lockdowns Harm Mental Health — And For How Long?",
+    title: "Did COVID-19 Lockdowns Harm Mental Health?",
     description: "COVID-19 containment policies led to widespread disruptions of daily life, with a growing body of evidence documenting their detrimental effects on mental health. However, it remains unclear to what extent these mental health outcomes are attributable specifically to containment policies rather than to other pandemic-related stressors (e.g., infections and deaths). When disentangling the effects of containment policies from those of the pandemic itself, we find insufficient evidence that prolonged containment policies in the first year of the pandemic had a lasting impact on population-level psychological distress.",
     image: "images/COVID.png",
     image_caption: "",
     image_max_height: "450",  // e.g. 400 — max height in px. Leave "" to fill panel.
     papers: [
-      { title: "Would Lifting versus Maintaining Covid-19 Containment Policies Have Reduced Psychological Distress in the United States?", venue: "in review at Lancet Regional Americas", url: "" },
+      { title: "Would Lifting versus Maintaining Covid-19 Containment Policies Have Reduced Psychological Distress in the United States?", venue: "medRxiv 2026", url: "https://www.medrxiv.org/content/10.64898/2026.03.06.26347802v1.full" },
     ],
   },
 
