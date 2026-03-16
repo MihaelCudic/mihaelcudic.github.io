@@ -87,24 +87,15 @@ nav {
 /* ── PAGE HEADER STRIP ────────────────────────────────────── */
 .page-header {
   border-bottom: var(--border);
-  padding: 3rem 3rem 2.5rem;
+  padding: 1.25rem 3rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 2rem;
-}
-
-.page-header-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 5rem;
-  font-weight: 400;
-  color: var(--light);
-  -webkit-text-stroke: 1.5px var(--black);
-  line-height: 1;
 }
 
 .page-header h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -133,7 +124,6 @@ a { color: inherit; }
 @media (max-width: 768px) {
   nav { padding: 0 1.25rem; }
   .nav-links li a { padding: 0 0.75rem; font-size: 0.65rem; }
-  .page-header { padding: 2rem 1.25rem 1.5rem; }
-  .page-header-num { font-size: 3rem; }
+  .page-header { padding: 1rem 1.25rem; }
   footer { padding: 1rem 1.25rem; flex-direction: column; gap: 0.25rem; text-align: center; }
 }
