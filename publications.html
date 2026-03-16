@@ -105,7 +105,10 @@
       flex-direction: column;
       justify-content: center;
       gap: 0.5rem;
-      min-width: 180px;
+      width: 200px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      overflow: hidden;
     }
 
     .pub-summary-count {
@@ -246,7 +249,6 @@
 
   <div class="page-header">
     <div class="pub-header-left">
-      <span class="page-header-num">03</span>
       <h1>Publications</h1>
     </div>
 
@@ -481,7 +483,7 @@ function updateCount() {
 
   const tagsEl = document.getElementById('pub-summary-tags');
   if (tags.length === 0) {
-    tagsEl.innerHTML = '<span style="font-size:0.6rem;color:var(--mid);letter-spacing:0.08em;">All filters active</span>';
+    tagsEl.innerHTML = '';
   } else {
     tagsEl.innerHTML = tags.map((t, i) =>
       (i > 0 ? '<span class="summary-and">and</span>' : '') +
