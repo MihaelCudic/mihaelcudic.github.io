@@ -17,9 +17,9 @@
 
     .pub-header-left {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       gap: 2rem;
-      padding: 3rem 3rem 2.5rem;
+      padding: 1.25rem 3rem;
       border-bottom: var(--border);
       flex-shrink: 0;
     }
@@ -95,76 +95,6 @@
       color: var(--mid);
       margin-left: auto;
       white-space: nowrap;
-    }
-
-    .pub-summary {
-      border-bottom: var(--border);
-      padding: 0.9rem 1.5rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1rem;
-      width: 200px;
-      flex-shrink: 0;
-      flex-grow: 0;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .pub-summary::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 20%;
-      height: 60%;
-      width: 1.5px;
-      background: var(--black);
-    }
-
-    .pub-summary-count {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--black);
-      line-height: 1;
-    }
-
-    .pub-summary-count span {
-      font-size: 0.65rem;
-      font-family: 'DM Mono', monospace;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-left: 0.3rem;
-    }
-
-    .pub-summary-tags {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.3rem;
-      min-height: 1.4rem;
-    }
-
-    .summary-tag {
-      font-size: 0.55rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.2rem 0.5rem;
-      border: 1px solid currentColor;
-      white-space: nowrap;
-    }
-
-    .summary-and {
-      font-size: 0.52rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--mid);
-    }
-
-    @media (max-width: 1100px) {
-      .pub-summary { display: none; }
     }
 
     @media (max-width: 860px) {
@@ -262,11 +192,6 @@
       <h1>Publications</h1>
     </div>
 
-    <div class="pub-summary" id="pub-summary">
-      <div class="pub-summary-count" id="pub-summary-count">—<span>pubs</span></div>
-      <div class="pub-summary-tags" id="pub-summary-tags"></div>
-    </div>
-
     <div class="pub-controls">
       <div class="filter-row">
         <span class="filter-label">Topic:</span>
@@ -286,6 +211,7 @@
         <button class="filter-btn type-btn" data-type="chapter">Chapter</button>
         <span style="color:var(--mid);opacity:0.4;font-size:0.8rem;margin:0 0.25rem;">|</span>
         <button class="filter-btn first-author-btn" data-firstauthor="true">First Author</button>
+        <span class="pub-count" id="pub-count"></span>
       </div>
     </div>
   </div>
@@ -464,40 +390,7 @@ function applyFilters() {
 
 function updateCount() {
   const visible = document.querySelectorAll('.pub-row:not(.hidden)').length;
-
-  // Build summary panel
-  document.getElementById('pub-summary-count').innerHTML =
-    `${visible}<span>publication${visible !== 1 ? 's' : ''}</span>`;
-
-  const tags = [];
-
-  // Active topics (skip 'all')
-  const topicColors = { AI: 'var(--accent)', Genetics: '#2a7a4b', Epidemiology: '#c47d10', Psychiatry: '#6b3fa0', Neuroscience: '#1a5a8b' };
-  if (!activeTopics.has('all')) {
-    [...activeTopics].forEach(t => {
-      tags.push({ label: t, color: topicColors[t] || 'var(--accent)' });
-    });
-  }
-
-  // Active type
-  if (activeType !== 'all') {
-    tags.push({ label: activeType, color: 'var(--black)' });
-  }
-
-  // First author
-  if (filterFirstAuthor) {
-    tags.push({ label: 'First Author', color: '#1a5a8b' });
-  }
-
-  const tagsEl = document.getElementById('pub-summary-tags');
-  if (tags.length === 0) {
-    tagsEl.innerHTML = '';
-  } else {
-    tagsEl.innerHTML = tags.map((t, i) =>
-      (i > 0 ? '<span class="summary-and">and</span>' : '') +
-      `<span class="summary-tag" style="color:${t.color};border-color:${t.color};">${t.label}</span>`
-    ).join('');
-  }
+  document.getElementById('pub-count').textContent = `${visible} publication${visible !== 1 ? 's' : ''}`;
 }
 
 // Topic: multi-select
