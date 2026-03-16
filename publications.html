@@ -17,9 +17,9 @@
 
     .pub-header-left {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       gap: 2rem;
-      padding: 3rem 3rem 2.5rem;
+      padding: 1.25rem 3rem;
       border-bottom: var(--border);
       flex-shrink: 0;
     }
@@ -98,27 +98,17 @@
     }
 
     .pub-summary {
+      border-left: var(--border);
       border-bottom: var(--border);
       padding: 0.9rem 1.5rem;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1rem;
-      width: 200px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 220px;
       flex-shrink: 0;
       flex-grow: 0;
       overflow: hidden;
-      position: relative;
-    }
-
-    .pub-summary::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 20%;
-      height: 60%;
-      width: 1.5px;
-      background: var(--black);
     }
 
     .pub-summary-count {
@@ -263,7 +253,7 @@
     </div>
 
     <div class="pub-summary" id="pub-summary">
-      <div class="pub-summary-count" id="pub-summary-count">—<span>pubs</span></div>
+      <div class="pub-summary-count" id="pub-summary-count">—<span>publications</span></div>
       <div class="pub-summary-tags" id="pub-summary-tags"></div>
     </div>
 
@@ -286,6 +276,7 @@
         <button class="filter-btn type-btn" data-type="chapter">Chapter</button>
         <span style="color:var(--mid);opacity:0.4;font-size:0.8rem;margin:0 0.25rem;">|</span>
         <button class="filter-btn first-author-btn" data-firstauthor="true">First Author</button>
+        <span class="pub-count" id="pub-count"></span>
       </div>
     </div>
   </div>
@@ -464,40 +455,29 @@ function applyFilters() {
 
 function updateCount() {
   const visible = document.querySelectorAll('.pub-row:not(.hidden)').length;
+  document.getElementById('pub-count').textContent = `${visible} publication${visible !== 1 ? 's' : ''}`;
 
-  // Build summary panel
+  // Summary panel
   document.getElementById('pub-summary-count').innerHTML =
     `${visible}<span>publication${visible !== 1 ? 's' : ''}</span>`;
 
   const tags = [];
-
-  // Active topics (skip 'all')
   const topicColors = { AI: 'var(--accent)', Genetics: '#2a7a4b', Epidemiology: '#c47d10', Psychiatry: '#6b3fa0', Neuroscience: '#1a5a8b' };
   if (!activeTopics.has('all')) {
-    [...activeTopics].forEach(t => {
-      tags.push({ label: t, color: topicColors[t] || 'var(--accent)' });
-    });
+    [...activeTopics].forEach(t => tags.push({ label: t, color: topicColors[t] || 'var(--accent)' }));
   }
-
-  // Active type
   if (activeType !== 'all') {
     tags.push({ label: activeType, color: 'var(--black)' });
   }
-
-  // First author
   if (filterFirstAuthor) {
     tags.push({ label: 'First Author', color: '#1a5a8b' });
   }
 
   const tagsEl = document.getElementById('pub-summary-tags');
-  if (tags.length === 0) {
-    tagsEl.innerHTML = '';
-  } else {
-    tagsEl.innerHTML = tags.map((t, i) =>
-      (i > 0 ? '<span class="summary-and">and</span>' : '') +
-      `<span class="summary-tag" style="color:${t.color};border-color:${t.color};">${t.label}</span>`
-    ).join('');
-  }
+  tagsEl.innerHTML = tags.length === 0 ? '' : tags.map((t, i) =>
+    (i > 0 ? '<span class="summary-and">and</span>' : '') +
+    `<span class="summary-tag" style="color:${t.color};border-color:${t.color};">${t.label}</span>`
+  ).join('');
 }
 
 // Topic: multi-select
