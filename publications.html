@@ -18,7 +18,7 @@
     .pub-header-left {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.25rem;
       padding: 1.25rem 3rem;
       border-bottom: var(--border);
       flex-shrink: 0;
@@ -90,11 +90,24 @@
     }
 
     .pub-count {
-      font-size: 0.62rem;
-      letter-spacing: 0.08em;
-      color: var(--mid);
-      margin-left: auto;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--black);
+      padding: 0.2rem 0.7rem;
       white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .and-badge {
+      font-size: 0.52rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--mid);
+      padding: 0.15rem 0.4rem;
+      margin: 0 0.1rem;
+      flex-shrink: 0;
     }
 
     @media (max-width: 860px) {
@@ -190,6 +203,7 @@
   <div class="page-header">
     <div class="pub-header-left">
       <h1>Publications</h1>
+      <span class="pub-count" id="pub-count"></span>
     </div>
 
     <div class="pub-controls">
@@ -202,16 +216,19 @@
         <button class="filter-btn topic-btn" data-topic="Psychiatry">Psychiatry</button>
         <button class="filter-btn topic-btn" data-topic="Neuroscience">Neuroscience</button>
       </div>
-      <div class="filter-divider"></div>
+      <div style="display:flex;align-items:center;gap:0.5rem;margin:0.1rem 0;">
+        <div style="flex:1;height:1px;background:rgba(0,0,0,0.08);"></div>
+        <span class="and-badge">and</span>
+        <div style="flex:1;height:1px;background:rgba(0,0,0,0.08);"></div>
+      </div>
       <div class="filter-row">
         <span class="filter-label">Type:</span>
         <button class="filter-btn type-btn active" data-type="all">All</button>
         <button class="filter-btn type-btn" data-type="journal">Journal</button>
         <button class="filter-btn type-btn" data-type="preprint">Preprint</button>
         <button class="filter-btn type-btn" data-type="chapter">Chapter</button>
-        <span style="color:var(--mid);opacity:0.4;font-size:0.8rem;margin:0 0.25rem;">|</span>
+        <span class="and-badge">and</span>
         <button class="filter-btn first-author-btn" data-firstauthor="true">First Author</button>
-        <span class="pub-count" id="pub-count"></span>
       </div>
     </div>
   </div>
