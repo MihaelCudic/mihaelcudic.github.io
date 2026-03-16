@@ -98,17 +98,27 @@
     }
 
     .pub-summary {
-      border-left: var(--border);
       border-bottom: var(--border);
       padding: 0.9rem 1.5rem;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0.5rem;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
       width: 200px;
       flex-shrink: 0;
       flex-grow: 0;
       overflow: hidden;
+      position: relative;
+    }
+
+    .pub-summary::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      height: 60%;
+      width: 1.5px;
+      background: var(--black);
     }
 
     .pub-summary-count {
@@ -253,7 +263,7 @@
     </div>
 
     <div class="pub-summary" id="pub-summary">
-      <div class="pub-summary-count" id="pub-summary-count">—<span>publications</span></div>
+      <div class="pub-summary-count" id="pub-summary-count">—<span>pubs</span></div>
       <div class="pub-summary-tags" id="pub-summary-tags"></div>
     </div>
 
@@ -276,7 +286,6 @@
         <button class="filter-btn type-btn" data-type="chapter">Chapter</button>
         <span style="color:var(--mid);opacity:0.4;font-size:0.8rem;margin:0 0.25rem;">|</span>
         <button class="filter-btn first-author-btn" data-firstauthor="true">First Author</button>
-        <span class="pub-count" id="pub-count"></span>
       </div>
     </div>
   </div>
@@ -455,7 +464,6 @@ function applyFilters() {
 
 function updateCount() {
   const visible = document.querySelectorAll('.pub-row:not(.hidden)').length;
-  document.getElementById('pub-count').textContent = `${visible} publication${visible !== 1 ? 's' : ''}`;
 
   // Build summary panel
   document.getElementById('pub-summary-count').innerHTML =
