@@ -146,13 +146,12 @@
       font-size: 0.62rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 0.15rem 0.5rem;
-      border: 1px solid var(--black);
       white-space: nowrap;
+      color: var(--mid);
     }
 
-    .course-level-tag.graduate   { background: var(--black); color: var(--white); }
-    .course-level-tag.undergraduate { color: var(--black); }
+    .course-level-tag.graduate   { color: var(--black); }
+    .course-level-tag.undergraduate { color: var(--mid); }
 
     .course-syllabus-line { margin-top: 0.1rem; }
 
@@ -223,10 +222,10 @@
 
   <div class="teaching-body">
     <aside class="teaching-sidebar" id="sidebar">
-      <p class="sidebar-section-label">Level</p>
-      <button class="level-btn active" data-level="all">All Courses</button>
-      <button class="level-btn" data-level="undergraduate">Undergraduate</button>
-      <button class="level-btn" data-level="graduate">Graduate</button>
+      <p class="sidebar-section-label">Role</p>
+      <button class="level-btn active" data-role="all">All Courses</button>
+      <button class="level-btn" data-role="professor">Professor</button>
+      <button class="level-btn" data-role="ta">Teaching Assistant</button>
     </aside>
 
     <div class="courses-list" id="courses-list"></div>
@@ -311,6 +310,7 @@ function renderCourses(courses) {
     const row = document.createElement('div');
     row.className = 'course-row';
     row.dataset.level = c.level;
+    row.dataset.role = c.role;
 
     const titleLine = [
       `<span class="course-title">${c.title}</span>`,
@@ -354,9 +354,9 @@ document.querySelectorAll('.level-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const level = btn.dataset.level;
+    const role = btn.dataset.role;
     document.querySelectorAll('.course-row').forEach(row => {
-      row.classList.toggle('hidden', level !== 'all' && row.dataset.level !== level);
+      row.classList.toggle('hidden', role !== 'all' && row.dataset.role !== role);
     });
   });
 });
