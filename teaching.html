@@ -60,10 +60,9 @@
     }
 
     .course-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: start;
-      gap: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
       padding: 2rem 3rem;
       border-bottom: var(--border);
       transition: background 0.15s;
@@ -72,11 +71,36 @@
     .course-row:hover { background: var(--light); }
     .course-row.hidden { display: none; }
 
-    .course-header {
+    .course-role-tag-wrap {
+      padding-top: 0.2rem;
+      flex-shrink: 0;
+      width: 130px;
+    }
+
+    .course-role {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid currentColor;
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    .course-role.professor { color: var(--accent); border-color: var(--accent); font-weight: 600; }
+    .course-role.ta { color: var(--mid); border-color: var(--mid); }
+
+    .course-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .course-title-line {
       display: flex;
       align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 0.3rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
 
@@ -96,54 +120,63 @@
     .course-meta {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 0.6rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
     }
 
+    .meta-sep {
+      color: var(--mid);
+      opacity: 0.4;
+      font-size: 0.72rem;
+    }
+
     .course-institution {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--mid);
     }
 
     .course-year {
-      font-size: 0.68rem;
+      font-size: 0.72rem;
       color: var(--accent);
     }
 
-    .course-role {
+    .course-level-tag {
       font-size: 0.62rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 0.2rem 0.55rem;
-      border: 1px solid currentColor;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid var(--black);
       white-space: nowrap;
     }
 
-    .course-role.professor { color: var(--accent); border-color: var(--accent); font-weight: 600; }
-    .course-role.ta { color: var(--mid); border-color: var(--mid); }
+    .course-level-tag.graduate   { background: var(--black); color: var(--white); }
+    .course-level-tag.undergraduate { color: var(--black); }
+
+    .course-syllabus-line { margin-top: 0.1rem; }
+
+    .course-syllabus {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      border-bottom: 1px solid var(--black);
+      transition: color 0.15s;
+    }
+
+    .course-syllabus:hover { color: var(--accent); border-color: var(--accent); }
 
     .course-desc {
       font-size: 0.82rem;
       color: var(--mid);
       line-height: 1.75;
-      margin-bottom: 0.5rem;
+      margin-top: 0.15rem;
     }
-
-    .course-rating {
-      font-size: 0.72rem;
-      color: var(--mid);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .course-rating strong { color: var(--black); }
 
     .course-rating-block {
-      margin-top: 0.75rem;
+      margin-top: 0.5rem;
       padding: 0.75rem 1rem;
       border-left: 2px solid var(--accent);
       background: var(--light);
@@ -173,37 +206,11 @@
       margin-top: 0.3rem;
     }
 
-    .course-syllabus {
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: var(--black);
-      border-bottom: 1px solid var(--black);
-      transition: color 0.15s;
-      margin-left: 0.75rem;
-    }
-
-    .course-syllabus:hover { color: var(--accent); border-color: var(--accent); }
-
-    .course-level-tag {
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      border: 1px solid var(--black);
-      white-space: nowrap;
-      align-self: start;
-    }
-
-    .course-level-tag.graduate   { background: var(--black); color: var(--white); }
-    .course-level-tag.undergraduate { color: var(--black); }
-
     @media (max-width: 860px) {
       .teaching-body { grid-template-columns: 1fr; }
       .teaching-sidebar { position: static; height: auto; border-right: none; border-bottom: var(--border); flex-direction: row; flex-wrap: wrap; padding: 1rem 1.25rem; gap: 0.5rem; }
       .sidebar-section-label { width: 100%; margin: 0; }
-      .course-row { grid-template-columns: 1fr; padding: 1.5rem 1.25rem; gap: 0.5rem; }
+      .course-row { flex-direction: column; padding: 1.5rem 1.25rem; gap: 0.5rem; }
     }
   </style>
 </head>
@@ -248,7 +255,7 @@ const COURSES = [
     code: "IDH3931",
     level: "undergraduate",
     role: "professor",
-    roleLabel: "Adjunct Professor",
+    roleLabel: "Professor",
     title: "AI Applications for Psychiatry",
     institution: "University of Florida",
     description: "ML methods for medical data, deep learning and generative AI, neurobiology and clinical psychiatry, and AI-driven approaches to understanding and predicting psychiatric conditions.",
@@ -305,10 +312,20 @@ function renderCourses(courses) {
     row.className = 'course-row';
     row.dataset.level = c.level;
 
-    const codeAndSyllabusHTML = [
+    const titleLine = [
+      `<span class="course-title">${c.title}</span>`,
       c.code ? `<span class="course-code">${c.code}</span>` : '',
-      c.syllabus ? `<a class="course-syllabus" href="${c.syllabus}" target="_blank">↗ Syllabus</a>` : '',
-    ].filter(Boolean).join('');
+    ].filter(Boolean).join(' ');
+
+    const metaLine = [
+      `<span class="course-institution">${c.institution}</span>`,
+      `<span class="course-year">${c.years}</span>`,
+      `<span class="course-level-tag ${c.level}">${c.level}</span>`,
+    ].join('<span class="meta-sep">·</span>');
+
+    const syllabusLine = c.syllabus
+      ? `<div class="course-syllabus-line"><a class="course-syllabus" href="${c.syllabus}" target="_blank">↗ Syllabus</a></div>`
+      : '';
 
     const ratingBlockHTML = c.rating ? `
       <div class="course-rating-block">
@@ -318,20 +335,16 @@ function renderCourses(courses) {
       </div>` : '';
 
     row.innerHTML = `
-      <div>
-        <div class="course-header">
-          <div class="course-title">${c.title}</div>
-          ${codeAndSyllabusHTML}
-        </div>
-        <div class="course-meta">
-          <span class="course-role ${c.role}">${c.roleLabel}</span>
-          <span class="course-institution">${c.institution}</span>
-          <span class="course-year">${c.years}</span>
-        </div>
+      <div class="course-role-tag-wrap">
+        <span class="course-role ${c.role}">${c.roleLabel}</span>
+      </div>
+      <div class="course-body">
+        <div class="course-title-line">${titleLine}</div>
+        <div class="course-meta">${metaLine}</div>
+        ${syllabusLine}
         <p class="course-desc">${c.description}</p>
         ${ratingBlockHTML}
-      </div>
-      <span class="course-level-tag ${c.level}">${c.level}</span>`;
+      </div>`;
     list.appendChild(row);
   });
 }
