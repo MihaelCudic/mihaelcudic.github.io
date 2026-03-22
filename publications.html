@@ -263,7 +263,7 @@
     </div>
 
     <div class="pub-summary" id="pub-summary">
-      <div class="pub-summary-count" id="pub-summary-count">—<span>publications</span></div>
+      <div class="pub-summary-count" id="pub-summary-count">—<span>total publications</span></div>
       <div class="pub-summary-tags" id="pub-summary-tags"></div>
     </div>
 
@@ -467,8 +467,11 @@ function applyFilters() {
 function updateCount() {
   const visible = document.querySelectorAll('.pub-row:not(.hidden)').length;
   // Summary panel
+  const total = document.querySelectorAll('.pub-row').length;
+  const isFiltered = !activeTopics.has('all') || activeType !== 'all' || filterFirstAuthor;
+  const label = isFiltered ? 'selected publications' : 'total publications';
   document.getElementById('pub-summary-count').innerHTML =
-    `${visible}<span>publication${visible !== 1 ? 's' : ''}</span>`;
+    `${visible}<span>${label}</span>`;
 
   const tags = [];
   const topicColors = { AI: 'var(--accent)', Genetics: '#2a7a4b', Epidemiology: '#c47d10', Psychiatry: '#6b3fa0', Neuroscience: '#1a5a8b' };
