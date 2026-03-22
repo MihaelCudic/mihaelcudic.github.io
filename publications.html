@@ -26,13 +26,23 @@
 
     .pub-controls {
       flex: 1;
-      border-left: var(--border);
       border-bottom: var(--border);
+      position: relative;
       padding: 0.9rem 1.5rem;
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
       justify-content: center;
+    }
+
+    .pub-controls::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      height: 60%;
+      width: 1.5px;
+      background: var(--black);
     }
 
     .filter-row {
