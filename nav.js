@@ -1,5 +1,35 @@
-/* nav.js — injects nav + footer, marks active page */
+/* nav.js — injects analytics + nav + footer, marks active page */
 (function () {
+
+  /* ============================================================
+     ANALYTICS — GoatCounter
+     ────────────────────────────────────────────────────────────
+     TO TURN IT ON:
+       1. Create a free account at https://www.goatcounter.com
+          and choose a code (your dashboard becomes
+          https://<code>.goatcounter.com).
+       2. Put that code below, e.g. 'mihaelcudic'.
+       3. Done — analytics load on EVERY page automatically,
+          because every page includes this nav.js file.
+
+     Until you replace 'YOUR_CODE', nothing loads (so the site is
+     safe to keep online while you get set up).
+     ============================================================ */
+  const GOATCOUNTER_CODE = 'mihaelcudic';
+
+  if (GOATCOUNTER_CODE && GOATCOUNTER_CODE !== 'mihaelcudic') {
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = '//gc.zgo.at/count.js';
+    s.setAttribute('data-goatcounter',
+      'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count');
+    document.head.appendChild(s);
+  }
+
+
+  /* ============================================================
+     NAV + FOOTER
+     ============================================================ */
   const pages = [
     { href: 'index.html',        label: 'About' },
     { href: 'research.html',     label: 'Research' },
