@@ -244,7 +244,8 @@
     }
 
     .pub-tag.journal     { color: var(--black); }
-    .pub-tag.preprint    { color: #6b7280; border-color: #6b7280; }
+    .pub-tag.conference  { color: #23627a; border-color: #23627a; }
+     .pub-tag.preprint    { color: #6b7280; border-color: #6b7280; }
     .pub-tag.chapter        { color: #5a3b8b; border-color: #5a3b8b; }
     .pub-tag.topic-tag   { font-size: 0.56rem; color: var(--accent); border-color: var(--accent); opacity: 0.75; }
 
@@ -286,6 +287,7 @@
         <span class="filter-label">Type:</span>
         <button class="filter-btn type-btn active" data-type="all">All</button>
         <button class="filter-btn type-btn" data-type="journal">Journal</button>
+         <button class="filter-btn type-btn" data-type="conference">Conference</button>
         <button class="filter-btn type-btn" data-type="preprint">Preprint</button>
         <button class="filter-btn type-btn" data-type="chapter">Chapter</button>
         <span style="color:var(--mid);opacity:0.4;font-size:0.8rem;margin:0 0.25rem;">|</span>
@@ -300,136 +302,132 @@
 
 <script src="nav.js"></script>
 <script>
-const PUBLICATIONS = [
-    {
-    year: 2026,
-    title: "Joint Effects of Early Pandemic Containment Policies on Anxiety in the United States",
-    authors: "D. Watts et al.",
-    venue: "medRxiv",
-    tag: "preprint",
-    topics: ["Epidemiology", "Psychiatry"],
-    firstAuthor: false,
-    url: "https://www.medrxiv.org/content/10.64898/2026.06.29.26356856v1",
-   },
-    {
-    year: 2026,
-    title: "Genetic Liability to Psychiatric Disorders is Associated with Metabolic Dysregulation Independent of Diagnosis and Treatment",
-    authors: "J. De la Hoz et al.",
-    venue: "medRxiv",
-    tag: "preprint",
-    topics: ["Genetics", "Psychiatry"],
-    firstAuthor: false,
-    url: "https://www.medrxiv.org/content/10.64898/2026.06.06.26354927v1",
-  },
-  {
-    year: 2026,
-    title: "Multi-Criteria Validation of LLM-Inferred Depression Severity from Outpatient Psychiatry Notes",
-    authors: "<strong>M. Cudic*</strong>, W. Meyerson*, ... J. Smoller",
-    venue: "medRxiv",
-    tag: "preprint",
-    topics: ["AI", "Psychiatry"],
-    firstAuthor: true,
-    url: "https://www.medrxiv.org/content/10.64898/2026.03.11.26348066v1",
-  },
-  {
-    year: 2026,
-    title: "Would Lifting versus Maintaining Covid-19 Containment Policies Have Reduced Psychological Distress in the United States?",
-    authors: "<strong>M. Cudic*</strong>, J. de la Hoz*, ... J. Smoller",
-    venue: "medRxiv",
-    tag: "preprint",
-    topics: ["Epidemiology", "Psychiatry"],
-    firstAuthor: true,
-    url: "https://www.medrxiv.org/content/10.64898/2026.03.06.26347802v1",
-  },
-  {
-    year: 2026,
-    title: "Putting Polygenic Scores in Context: How Intersectional Factors Affect Relative and Absolute Genetic Risk",
-    authors: "<strong>M. Cudic</strong>, J. Tubbs, T. Ge & J. Smoller",
-    venue: "American Journal of Human Genetics",
-    tag: "journal",
-    topics: ["Genetics", "Psychiatry"],
-    firstAuthor: true,
-    url: "https://www.cell.com/ajhg/abstract/S0002-9297(26)00123-0",
-  },
-  {
-    year: 2025,
-    title: "A robust framework for harmonising health measures across international cohorts: Evidence from the COVID-19 pandemic",
-    authors: "J. Lian et al.",
-    venue: "medRxiv",
-    tag: "preprint",
-    topics: ["Epidemiology", "Psychiatry"],
-    firstAuthor: false,
-    url: "https://www.medrxiv.org/content/10.1101/2025.09.09.25335409v1",
-  },
-  {
-    year: 2024,
-    title: "Neuron Segmentation from Noisy Fluorescence Microscopy Images Using Deep Learning with Local and Global Scale Fusion",
-    authors: "<strong>M. Cudic</strong>, J. Diamond & A. Noble",
-    venue: "Neuromethods",
-    tag: "chapter",
-    topics: ["AI", "Neuroscience"],
-    firstAuthor: true,
-    url: "https://link.springer.com/protocol/10.1007/978-1-0716-4011-1_3",
-  },
-  {
-    year: 2023,
-    title: "Unpaired mesh-to-image translation for 3D fluorescent microscopy images of neurons",
-    authors: "<strong>M. Cudic</strong>, J. Diamond & A. Noble",
-    venue: "Medical Image Analysis",
-    tag: "journal",
-    topics: ["AI", "Neuroscience"],
-    firstAuthor: true,
-    url: "https://www.sciencedirect.com/science/article/pii/S1361841523000294",
-  },
-  {
-    year: 2019,
-    title: "Using a Recurrent Kernel Learning Machine for Small-Sample Image Classification",
-    authors: "<strong>M. Cudic</strong> & J. Principe",
-    venue: "International Joint Conference on Neural Networks",
-    tag: "journal",
-    topics: ["AI"],
-    firstAuthor: true,
-    url: "https://ieeexplore.ieee.org/document/8852004",
-  },
-  {
-    year: 2018,
-    title: "Prediction of sorghum bicolor genotype from in-situ images using autoencoder-identified SNPs",
-    authors: "<strong>M. Cudic</strong>, H. Baweja, T. Parhar & S. Nuske",
-    venue: "IEEE International Conference on Machine Learning and Applications",
-    tag: "journal",
-    topics: ["AI", "Genetics"],
-    firstAuthor: true,
-    url: "https://ieeexplore.ieee.org/document/8614037",
-  },
-  {
-    year: 2018,
-    title: "A flexible testing environment for visual question answering with performance evaluation",
-    authors: "<strong>M. Cudic</strong>, R. Burt, E. Santana & J. Principe",
-    venue: "Neurocomputing",
-    tag: "journal",
-    topics: ["AI"],
-    firstAuthor: true,
-    url: "https://www.sciencedirect.com/science/article/abs/pii/S0925231218302315",
-  },
-  {
-    year: 2017,
-    title: "Fusing Attention with Visual Question Answering",
-    authors: "R. Burt, <strong>M. Cudic</strong> & J. Principe",
-    venue: "International Joint Conference on Neural Networks",
-    tag: "journal",
-    topics: ["AI"],
-    firstAuthor: false,
-    url: "https://ieeexplore.ieee.org/document/7965954",
-  },
-  { year: 2017,
-    title: "Targeting cancer-specific glycans by cyclic peptide lectinomimics",
-    authors: "M. Rodriguez, A. Yongye, <strong>M. Cudic</strong>, ..., P. Cudic",
-    venue: "Amino Acids",
-    tag: "journal",
-    topics: [],
-    firstAuthor: false,
-    url: "https://link.springer.com/article/10.1007/s00726-017-2485-3",}
-];
+// publications.bib is the single source of truth for this page.
+// Supports BibTeX records with nested brace values, quoted values, and custom fields.
+function parseBibTeX(source) {
+  const records = [];
+  let i = 0;
+  const n = source.length;
+  const space = () => { while (i < n && /\s/.test(source[i])) i++; };
+  const readValue = () => {
+    space();
+    if (source[i] === '{' || source[i] === '"') {
+      const quote = source[i++];
+      if (quote === '"') {
+        let result = '';
+        while (i < n && source[i] !== '"') {
+          if (source[i] === '\\' && i + 1 < n) result += source[i++];
+          result += source[i++];
+        }
+        if (source[i] === '"') i++;
+        return result.trim();
+      }
+      let depth = 1, result = '';
+      while (i < n && depth > 0) {
+        const c = source[i++];
+        if (c === '\\' && i < n) { result += c + source[i++]; continue; }
+        if (c === '{') depth++;
+        else if (c === '}') depth--;
+        if (depth > 0) result += c;
+      }
+      return result.trim();
+    }
+    const begin = i;
+    while (i < n && !/[\s,}]/.test(source[i])) i++;
+    return source.slice(begin, i).trim();
+  };
+  while (i < n) {
+    if (source[i] === '%') { while (i < n && source[i] !== '\n') i++; continue; }
+    if (source[i] !== '@') { i++; continue; }
+    i++; space();
+    const typeStart = i;
+    while (i < n && /[a-z]/i.test(source[i])) i++;
+    const entryType = source.slice(typeStart, i).toLowerCase();
+    space();
+    if (source[i] !== '{' && source[i] !== '(') continue;
+    const closer = source[i++] === '{' ? '}' : ')';
+    space();
+    if (['comment', 'preamble', 'string'].includes(entryType)) {
+      // Skip BibTeX directives, not publication entries.
+      let depth = 1;
+      while (i < n && depth) {
+        if (source[i] === '{') depth++;
+        if (source[i] === '}') depth--;
+        i++;
+      }
+      continue;
+    }
+    const keyStart = i;
+    while (i < n && source[i] !== ',' && source[i] !== closer) i++;
+    const record = { entryType, key: source.slice(keyStart, i).trim() };
+    if (source[i] === ',') i++;
+    while (i < n) {
+      space();
+      if (source[i] === closer) { i++; break; }
+      if (source[i] === ',') { i++; continue; }
+      if (source[i] === '%') { while (i < n && source[i] !== '\n') i++; continue; }
+      const fieldStart = i;
+      while (i < n && /[\w-]/.test(source[i])) i++;
+      if (fieldStart === i) { i++; continue; }
+      const field = source.slice(fieldStart, i).toLowerCase();
+      space();
+      if (source[i] !== '=') continue;
+      i++;
+      record[field] = readValue();
+      space();
+      if (source[i] === ',') i++;
+    }
+    if (record.title) records.push(record);
+  }
+  return records;
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[c]);
+}
+
+function publicationFromBib(entry) {
+  const type = (entry.pubtype || ({
+    inproceedings: 'conference', incollection: 'chapter', article: 'journal'
+  })[entry.entryType] || 'journal').toLowerCase();
+  // Prefer the short website-specific author string, then use the canonical author list.
+  const display = entry.displayauthors || (entry.author || '').split(/\s+and\s+/i).map(a => {
+    const parts = a.replace(/[{}]/g, '').split(',');
+    if (parts.length > 1) return `${parts[1].trim().charAt(0)}. ${parts[0].trim()}`;
+    return parts[0].trim();
+  }).join(', ');
+  return {
+    year: parseInt(entry.year, 10) || 0,
+    title: entry.title.replace(/[{}]/g, ''),
+    authors: escapeHTML(display).replace(/\bM\. Cudic\b/g, '<strong>M. Cudic</strong>'),
+    venue: entry.journal || entry.series || entry.booktitle || entry.publisher || '',
+    tag: type,
+    topics: (entry.topic || '').split(',').map(t => t.trim()).filter(Boolean),
+    firstAuthor: entry.firstauthor ? entry.firstauthor.toLowerCase() === 'true' : /^Cudic\s*,\s*Mihael/i.test(entry.author || ''),
+    url: entry.url || (entry.doi ? `https://doi.org/${entry.doi}` : ''),
+    sortOrder: Number(entry.sortorder) || Number.MAX_SAFE_INTEGER
+  };
+}
+
+async function loadPublications() {
+  const container = document.getElementById('pub-list');
+  container.textContent = 'Loading publications…';
+  try {
+    const response = await fetch('publications.bib', { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const entries = parseBibTeX(await response.text());
+    if (!entries.length) throw new Error('No publication entries were found.');
+    const publications = entries.map(publicationFromBib).sort((a, b) =>
+      b.year - a.year || a.sortOrder - b.sortOrder || a.title.localeCompare(b.title));
+    container.textContent = '';
+    renderPublications(publications);
+  } catch (error) {
+    console.error('Unable to load publications.bib:', error);
+    container.innerHTML = '<div class="pub-row">Could not load publications.bib. Place it beside publications.html and open the site via a web server (not file://).</div>';
+  }
+}
 
 let activeTopics = new Set(['all']);
 let activeType = 'all';
@@ -437,6 +435,7 @@ let filterFirstAuthor = false;
 
 function renderPublications(pubs) {
   const container = document.getElementById('pub-list');
+  container.replaceChildren();
   const byYear = {};
   pubs.forEach(p => {
     if (!byYear[p.year]) byYear[p.year] = [];
@@ -456,11 +455,11 @@ function renderPublications(pubs) {
       row.dataset.firstauthor = p.firstAuthor ? 'true' : 'false';
 
       const titleHTML = p.url
-        ? `<a href="${p.url}" target="_blank">${p.title}</a>`
-        : p.title;
+        ? `<a href="${escapeHTML(p.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.title)}</a>`
+        : escapeHTML(p.title);
 
       const topicPills = (p.topics || []).map(t =>
-        `<span class="pub-tag topic-tag">${t}</span>`
+        `<span class="pub-tag topic-tag">${escapeHTML(t)}</span>`
       ).join('');
 
       row.innerHTML = `
@@ -468,11 +467,11 @@ function renderPublications(pubs) {
           <div class="pub-title">${titleHTML}</div>
           <div class="pub-meta">
             ${p.authors}<br>
-            <span class="venue">${p.venue}</span>
+            <span class="venue">${escapeHTML(p.venue)}</span>
           </div>
         </div>
         <div class="pub-tags">
-          <span class="pub-tag ${p.tag}">${p.tag}</span>
+          <span class="pub-tag ${escapeHTML(p.tag)}">${escapeHTML(p.tag)}</span>
           ${topicPills}
         </div>`;
 
@@ -491,7 +490,7 @@ function applyFilters() {
     const rowType = row.dataset.tag;
     const rowFirstAuthor = row.dataset.firstauthor === 'true';
     const topicMatch = activeTopics.has('all') || [...activeTopics].every(t => rowTopics.includes(t));
-    const typeMatch = activeType === 'all' || rowType === activeType || (activeType === 'journal' && rowType === 'featured');
+    const typeMatch = activeType === 'all' || rowType === activeType;
     const firstAuthorMatch = !filterFirstAuthor || rowFirstAuthor;
     row.classList.toggle('hidden', !(topicMatch && typeMatch && firstAuthorMatch));
   });
@@ -582,7 +581,7 @@ document.querySelector('.first-author-btn').addEventListener('click', function()
   applyFilters();
 });
 
-renderPublications(PUBLICATIONS);
+loadPublications();
 </script>
 </body>
 </html>

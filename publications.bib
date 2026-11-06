@@ -1,0 +1,219 @@
+% MASTER PUBLICATION DATABASE — Mihael Cudic
+% One canonical record per publication. Both CV generation and the website read this file.
+%
+% CUSTOM FIELDS:
+%   topic       = comma-separated website filter labels: AI, Genetics, Epidemiology, Psychiatry, Neuroscience
+%   pubtype     = journal | conference | chapter | preprint (classification for CV and website)
+%   firstauthor = true | false (website first-author filter; includes co-first authors)
+%   cofirstauthors = comma-separated 1-based author positions with equal first-author contributions; e.g. {1, 2}
+%                    Only assign where co-first authorship is documented. The CV prints * after these names.
+%   displayauthors = optional abbreviated/annotated display string for website; full author field is canonical
+%   authorscomplete = true | false (all 13 author lists have now been verified)
+%   url         = direct publication link (prefer DOI where possible)
+%   doi         = canonical DOI when known
+%   sortorder   = integer, lower appears earlier within a publication year
+%
+% BIBTEX ENTRY TYPES: @article (journal/preprint), @inproceedings (conference), @incollection (chapter)
+% SOURCE: uploaded publications.html and Cudic_CV.tex; metadata must be reviewed before formal submission.
+% Google Scholar live profile was not available as a definitive export; do not assume this is exhaustive.
+% The thesis and posters remain authored directly in the CV because they were not in the website publication list.
+% To update: edit/add a record here, then run python3 update_publications.py.
+
+@article{watts2026joint,
+  title = {Joint Effects of Early Pandemic Containment Policies on Anxiety in the United States},
+  author = {Watts, Devon and Khadse, Pratik Nitin and Ebrahimi, Omid and Tubbs, Justin and Lian, James and Dall'Aglio, Lorenza and Fatori, Daniel and Zhou, Yu and Zuccolo, Pedro and Cudic, Mihael and De La Hoz Gomez, Juan Fernando and Lee, Younga Heather and Manfro, Gisele Gus and Bauermeister, Sarah and Brunoni, Andre and Choi, Karmel W. and Kennedy, Chris J. and Smoller, Jordan W.},
+  year = {2026},
+  journal = {medRxiv},
+  url = {https://www.medrxiv.org/content/10.64898/2026.06.29.26356856v1},
+  topic = {Epidemiology, Psychiatry},
+  pubtype = {preprint},
+  firstauthor = {false},
+  displayauthors = {D. Watts et al.},
+  authorscomplete = {true},
+  sortorder = {01},
+}
+
+@article{delahoz2026metabolic,
+  title = {Genetic Liability to Psychiatric Disorders is Associated with Metabolic Dysregulation Independent of Diagnosis and Treatment},
+  author = {De la Hoz, Juan F. and Lee, Younga Heather and Tubbs, Justin D. and Meyerson, William and Cudic, Mihael and Watts, Devon and Feng, Yen-Chen Anne and Chen, Yulu and Lasky-Su, Jessica and Ge, Tian and Smoller, Jordan W.},
+  year = {2026},
+  journal = {medRxiv},
+  url = {https://www.medrxiv.org/content/10.64898/2026.06.06.26354927v1},
+  topic = {Genetics, Psychiatry},
+  pubtype = {preprint},
+  firstauthor = {false},
+  displayauthors = {J. De la Hoz et al.},
+  authorscomplete = {true},
+  sortorder = {02},
+}
+
+@article{cudic2026llm,
+  title = {Multi-Criteria Validation of LLM-Inferred Depression Severity from Outpatient Psychiatry Notes},
+  author = {Cudic, Mihael and Meyerson, William and Wang, Bo and Yin, Qingqing and Khadse, Pratik N. and Burke, Taylor and Kennedy, Chris J. and Smoller, Jordan W.},
+  year = {2026},
+  journal = {medRxiv},
+  url = {https://www.medrxiv.org/content/10.64898/2026.03.11.26348066v1},
+  topic = {AI, Psychiatry},
+  pubtype = {preprint},
+  firstauthor = {true},
+  cofirstauthors = {1, 2},
+  displayauthors = {M. Cudic*, W. Meyerson*, ... J. Smoller},
+  authorscomplete = {true},
+  sortorder = {03},
+}
+
+@article{cudic2026containment,
+  title = {Would Lifting versus Maintaining Covid-19 Containment Policies Have Reduced Psychological Distress in the United States?},
+  author = {Cudic, Mihael and de la Hoz, Juan F. and Dall'Aglio, Lorenza and Tubbs, Justin D. and Ebrahimi, Omid V. and Madsen, Emily and Fatori, Daniel and Zuccolo, Pedro F. and Lian, James and Kabir, Dia and Zhou, Yu and Watts, Devon and Choi, Karmel W. and Manfro, Gisele G. and Sweeney, Ellen and Lin, Yen-Feng and Fancourt, Daisy and {COVID-19 Global Mental Health Consortium (CGMHC)} and Patel, Vikram and Kessler, Ronald C. and Bauermeister, Sarah and Brunoni, Andre R. and Lee, Younga Heather and Smoller, Jordan W.},
+  year = {2026},
+  journal = {medRxiv},
+  url = {https://www.medrxiv.org/content/10.64898/2026.03.06.26347802v1},
+  topic = {Epidemiology, Psychiatry},
+  pubtype = {preprint},
+  firstauthor = {true},
+  cofirstauthors = {1, 2},
+  displayauthors = {M. Cudic*, J. de la Hoz*, ... J. Smoller},
+  authorscomplete = {true},
+  sortorder = {04},
+}
+
+@article{cudic2026polygenic,
+  title = {Putting Polygenic Scores in Context: How Intersectional Factors Affect Relative and Absolute Genetic Risk},
+  author = {Cudic, Mihael and Tubbs, JD and Ge, T and Smoller, JW},
+  year = {2026},
+  journal = {American Journal of Human Genetics},
+  volume = {113},
+  number = {5},
+  pages = {966--977},
+  doi = {10.1016/j.ajhg.2026.03.013},
+  url = {https://www.cell.com/ajhg/abstract/S0002-9297(26)00123-0},
+  topic = {Genetics, Psychiatry},
+  pubtype = {journal},
+  firstauthor = {true},
+  displayauthors = {M. Cudic, J. Tubbs, T. Ge & J. Smoller},
+  authorscomplete = {true},
+  sortorder = {05},
+}
+
+@article{lian2025harmonising,
+  title = {A robust framework for harmonising health measures across international cohorts: Evidence from the COVID-19 pandemic},
+  author = {Lian, James and Zuccolo, Pedro F. and Ebrahimi, Omid V. and Fatori, Daniel and Adlakha, Abhaya and De La Hoz, Juan F. and Lee, Younga H. and Carneiro, Adriana and Benseñor, Isabela M. and Lotufo, Paulo A. and Goulart, Alessandra C. and Tubbs, Justin D. and Watts, Devon and Zhou, Yu and Dall'Aglio, Lorenza and Cudic, Mihael and Kuenzi, Morgane and {CGMHC Consortium} and Kessler, Ronald C. and Patel, Vikram and Brunoni, André and Smoller, Jordan W. and Bauermeister, Sarah},
+  year = {2025},
+  journal = {medRxiv},
+  url = {https://www.medrxiv.org/content/10.1101/2025.09.09.25335409v1},
+  topic = {Epidemiology, Psychiatry},
+  pubtype = {preprint},
+  firstauthor = {false},
+  displayauthors = {J. Lian et al.},
+  authorscomplete = {true},
+  sortorder = {06},
+}
+
+@incollection{cudic2024segmentation,
+  title = {Neuron Segmentation from Noisy Fluorescence Microscopy Images Using Deep Learning with Local and Global Scale Fusion},
+  author = {Cudic, Mihael and Diamond, Jeffrey S. and Noble, J. Alison},
+  year = {2024},
+  booktitle = {Fluorescence Imaging of the Brain},
+  series = {Neuromethods},
+  volume = {209},
+  pages = {59--81},
+  doi = {10.1007/978-1-0716-4011-1_3},
+  url = {https://link.springer.com/protocol/10.1007/978-1-0716-4011-1_3},
+  topic = {AI, Neuroscience},
+  pubtype = {chapter},
+  firstauthor = {true},
+  displayauthors = {M. Cudic, J. Diamond & A. Noble},
+  authorscomplete = {true},
+  sortorder = {07},
+}
+
+@article{cudic2023mesh,
+  title = {Unpaired mesh-to-image translation for 3D fluorescent microscopy images of neurons},
+  author = {Cudic, Mihael and Diamond, Jeffrey S. and Noble, J. Alison},
+  year = {2023},
+  journal = {Medical Image Analysis},
+  volume = {86},
+  pages = {102768},
+  doi = {10.1016/j.media.2023.102768},
+  url = {https://www.sciencedirect.com/science/article/pii/S1361841523000294},
+  topic = {AI, Neuroscience},
+  pubtype = {journal},
+  firstauthor = {true},
+  displayauthors = {M. Cudic, J. Diamond & A. Noble},
+  authorscomplete = {true},
+  sortorder = {08},
+}
+
+@inproceedings{cudic2019recurrent,
+  title = {Using a Recurrent Kernel Learning Machine for Small-Sample Image Classification},
+  author = {Cudic, Mihael and Principe, Jose C.},
+  year = {2019},
+  booktitle = {International Joint Conference on Neural Networks},
+  pages = {1--6},
+  url = {https://ieeexplore.ieee.org/document/8852004},
+  topic = {AI},
+  pubtype = {conference},
+  firstauthor = {true},
+  displayauthors = {M. Cudic & J. Principe},
+  authorscomplete = {true},
+  sortorder = {09},
+}
+
+@inproceedings{cudic2018sorghum,
+  title = {Prediction of sorghum bicolor genotype from in-situ images using autoencoder-identified SNPs},
+  author = {Cudic, Mihael and Baweja, HS and Parhar, T and Nuske, S},
+  year = {2018},
+  booktitle = {IEEE International Conference on Machine Learning and Applications},
+  pages = {23--31},
+  url = {https://ieeexplore.ieee.org/document/8614037},
+  topic = {AI, Genetics},
+  pubtype = {conference},
+  firstauthor = {true},
+  displayauthors = {M. Cudic, H. Baweja, T. Parhar & S. Nuske},
+  authorscomplete = {true},
+  sortorder = {10},
+}
+
+@article{cudic2018vqa,
+  title = {A flexible testing environment for visual question answering with performance evaluation},
+  author = {Cudic, Mihael and Burt, Ryan and Santana, Eder and Principe, Jose C.},
+  year = {2018},
+  journal = {Neurocomputing},
+  url = {https://www.sciencedirect.com/science/article/abs/pii/S0925231218302315},
+  topic = {AI},
+  pubtype = {journal},
+  firstauthor = {true},
+  displayauthors = {M. Cudic, R. Burt, E. Santana & J. Principe},
+  authorscomplete = {true},
+  sortorder = {11},
+}
+
+@inproceedings{burt2017attention,
+  title = {Fusing Attention with Visual Question Answering},
+  author = {Burt, Ryan and Cudic, Mihael and Principe, Jose C.},
+  year = {2017},
+  booktitle = {International Joint Conference on Neural Networks},
+  pages = {949--953},
+  url = {https://ieeexplore.ieee.org/document/7965954},
+  topic = {AI},
+  pubtype = {conference},
+  firstauthor = {false},
+  displayauthors = {R. Burt, M. Cudic & J. Principe},
+  authorscomplete = {true},
+  sortorder = {12},
+}
+
+@article{rodriguez2017glycans,
+  title = {Targeting cancer-specific glycans by cyclic peptide lectinomimics},
+  author = {Rodriguez, Maria C. and Yongye, Austin B. and Cudic, Mihael and Martinez Mayorga, Karina and Liu, Enbo and Mueller, Barbara M. and Ainsley, Jon and Karabencheva-Christova, Tatyana and Christov, Christo Z. and Cudic, Mare and Cudic, Predrag},
+  year = {2017},
+  journal = {Amino Acids},
+  url = {https://link.springer.com/article/10.1007/s00726-017-2485-3},
+  topic = {},
+  pubtype = {journal},
+  firstauthor = {false},
+  displayauthors = {M. Rodriguez, A. Yongye, M. Cudic, ..., P. Cudic},
+  authorscomplete = {true},
+  sortorder = {13},
+}
+
